@@ -1,0 +1,6 @@
+#ifndef FONCTIONS_H_INCLUDED
+#define FONCTIONS_H_INCLUDED
+#define NB 8
+
+
+#endif // FONCTIONS_H_INCLUDED
