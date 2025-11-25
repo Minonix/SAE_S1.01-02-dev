@@ -1,13 +1,20 @@
 #include "../Headers/fonctions.h"
+#include <stdio.h>
 
 
 // 1.l’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et
 // d’arrivée)
-
+void afficherTrajet(int nb, Trajet lTrajet[nb]){
+    for (int i=0; i<nb; i++) {
+            printf("Ville de départ : %s ; Ville d'arrivée : %s ; Date de départ : %s ; Horaire de Départ : %s ; Horaire d'arrivée : %s",
+            lTrajet[i].villeDepart, lTrajet[i].villeArrivee, lTrajet[i].dateDepart, lTrajet[i].horaireDepart, lTrajet[i].horaireArrivee);
+    }
+}
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
 
 // 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
+
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
 

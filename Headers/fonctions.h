@@ -18,7 +18,7 @@ typedef struct {
 } Trajet ;
 
 // 1.l’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et d’arrivée)
-void afficherTrajet(Trajet trajet);
+void afficherTrajet(int nb, Trajet lTrajet[nb]);
 
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
