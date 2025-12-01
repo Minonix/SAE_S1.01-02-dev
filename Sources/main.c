@@ -14,7 +14,7 @@ int main(void)
     printf("Veiliier renseinger le chemin vers le CSV : \n");
     // scanf("%s", &chemin); //! retirer le \n en haut
     int nb_l = count_file(chemin, &nb_c);
-    Trajet *fichier = malloc(nb_l * sizeof(Trajet));
+    Trajet *fichier = calloc(nb_l, sizeof(Trajet));
     if (fichier == NULL)
         return 1;
 
@@ -39,7 +39,7 @@ int main(void)
         // On suppose ici que la liste de passagers est remplie.
         // Note : Il serait bien d'avoir un champ 'nb_passagers' dans ta struct Trajet
         // Ici, j'affiche les 5 premiers pour tester, ou jusqu'à ce que l'ID soit 0
-        for (int p = 0; p < 30; p++)
+        for (int p = 0; p < 55; p++)
         {
             // Condition simple pour ne pas afficher des passagers vides (ajuste selon ta struct)
             if (fichier[i].listePassagers[p].id != 0)
@@ -109,7 +109,7 @@ void parsec(char *chemin, int nb, Trajet result[nb], int nb_c)
     }
 
     char *buffer;
-    buffer = malloc(sizeof(char) * nb_c);
+    buffer = malloc(sizeof(char) * (nb_c + 1));
     if (buffer == NULL)
     {
         printf("buffer, na pus trouver de l'espace");
@@ -171,9 +171,9 @@ char **parsec_ligne(char *ligne, const char delimiter)
     {
         int longueur = fin - debut;
         char *item = malloc(longueur + 1);
+        if (item == NULL) return (NULL);
         strncpy(item, debut, longueur);
         item[longueur] = '\0';
-        // printf("item = %s\n", item);
         list_item[x] = item;
         x++;
         debut = fin + 1;
@@ -182,9 +182,9 @@ char **parsec_ligne(char *ligne, const char delimiter)
     for (longueur = 0; debut[longueur] != 0; longueur++)
         ;
     char *item = malloc(longueur + 1);
+    if (item == NULL) return (NULL) ;
     strncpy(item, debut, longueur);
     item[longueur] = '\0';
-    // printf("item = %s\n", item);
     list_item[x] = item;
     return list_item;
 }

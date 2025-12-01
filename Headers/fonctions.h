@@ -14,7 +14,7 @@ typedef struct {
     char dateDepart[11];
     char horaireDepart[5];
     char horaireArrivee[5];
-    Passager listePassagers[55];
+    Passager listePassagers[56];
 } Trajet ;
 
 

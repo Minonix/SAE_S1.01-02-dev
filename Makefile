@@ -2,10 +2,10 @@
 CC = gcc
 
 # Options de compilation
-# -Wall -Wextra : Affiche tous les avertissements utiles
-# -g : Ajoute les informations de débogage
+# -Wall -Wextra -Werror: Affiche tous les avertissements utiles
+# -g3 : Ajoute les informations de débogage
 # -IHeaders : Spécifie que les fichiers d'en-tête (.h) se trouvent dans le dossier Headers
-CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders
+CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders 
 
 # Nom de l'exécutable final
 EXEC = main.exe
