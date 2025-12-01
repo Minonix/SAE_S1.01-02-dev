@@ -17,7 +17,20 @@ typedef struct {
     Passager listePassagers[55];
 } Trajet ;
 
-// 1.l’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et d’arrivée)
+
+/*
+Parametres : c1, c2 deux pointeurs vers une chaine de caractere.
+Pre-condition : c1 doit être de la même taille ou plus grande que c2
+Post_condition : Copie la chaine c2 dans la chaine c1
+*/
+void copie_str(char* c1, char* c2);
+
+
+/* 1
+Parametres : nb un int, lTrajet un tableau de nb éléments contennant des struct Trajet
+Pré-condition : aucune
+Post-condition : L’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et d’arrivée)
+*/
 void afficherTrajet(int nb, Trajet lTrajet[nb]);
 
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
@@ -30,8 +43,14 @@ void afficheTrajetTriés(Trajet trajet);
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
 void ajoutSupprClients(Trajet trajet, int numbus);
 
-// 5. à partir du numéro d’un bus et de numéro (id) d’un client, modification ou ajout du nom du client ou du prix de son billet
-void modificationClients(Trajet trajet, int numbus, int idClient);
+/* 5
+Parametres : int nb ; lTrajet, un pointeur vers un tableau contennant nb élément de type Trajet ; int nBus le numéro d'un bus (de type Trajet);
+             Passager Client, un client possédant un id, un nom et un prix.
+Pré-condition : aucune
+Post-condition : à partir d'un numéro d’un bus et du numéro (id) d’un client, modifie ou ajoute le nom du client ou/et
+                 du prix de son billet
+*/
+void modificationClients(int nb, Trajet* lTrajet, int numbus, Passager client);
 
 // 6. la sauvegarde des données dans un fichier (mise à jour du fichier ou création d’un nouveau fichier)
 void sauvegardeDonnees(Trajet trajet);
