@@ -2,6 +2,11 @@
 #define FONCTIONS_H_INCLUDED
 #define NB 8
 
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 typedef struct {
     int id;
     char nom[50];
