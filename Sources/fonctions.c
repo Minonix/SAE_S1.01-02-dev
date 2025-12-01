@@ -1,8 +1,26 @@
 #include "../Headers/fonctions.h"
+#include <stdio.h>
 
 
-// 1.l’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et
-// d’arrivée)
+
+
+void copie_str(char* c1, char* c2){
+    int i=0;
+    for (i=0; c2[i]!=0; i++){
+        c1[i] = c2[i];
+    }
+    c1[i] = 0;
+}
+
+
+//1
+void afficherTrajet(int nb, Trajet lTrajet[nb]){
+    printf("Voici la liste de tout les trajets : \n");
+    for (int i=0; i<nb; i++) {  //Parcours de tout les trajets.
+            printf("Ville de départ : %s ; Ville d'arrivée : %s ; Date de départ : %s ; Horaire de Départ : %s ; Horaire d'arrivée : %s", // affichage des trajets
+            lTrajet[i].villeDepart, lTrajet[i].villeArrivee, lTrajet[i].dateDepart, lTrajet[i].horaireDepart, lTrajet[i].horaireArrivee);
+    }
+}
 
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
@@ -11,8 +29,32 @@
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
 
-// 5. à partir du numéro d’un bus et de numéro (id) d’un client, modification ou ajout du nom du client ou
-// du prix de son billet
+
+// 5
+void modificationClients(int nb, Trajet* lTrajet, int nBus, Passager client ){
+    int trouve = 0; // si un client est trouvé pour un trajet donné.
+    for (int i=0; i<nb && !trouve ; i++){ // On cherche le bus ayant pour numéro bus nBus // debut for1
+        if (lTrajet[i].numbus == nBus){ //On le trouve
+            int j;
+            for (j=0; j<55 && lTrajet[i].listePassagers[j].nom[0]!=0 && !trouve ; j++){ // On cherche le passager // debut for2
+                if (lTrajet[i].listePassagers[j].id == client.id){ // On le trouve
+                    copie_str(lTrajet[i].listePassagers[j].nom, client.nom); // On change son nom par le nouveau nom qui peut être identifique au premier
+                    lTrajet[i].listePassagers[j].prixbillet = client.prixbillet; // On change le prix de son billet
+                    trouve = 1;} // On a fait ce que l'on voulait faire, le programme vas donc s'arreter.
+            } // fin for2
+            if (!trouve){
+                if (j>54){
+                    printf("Le bus %d est complet.", lTrajet[i].numbus);}
+                else{
+                    lTrajet[i].listePassagers[j] = client ;}
+                trouve = 1;
+            } // fin if
+
+        } //fin if
+    } // fin for1
+    if (!trouve)printf("Le bus %d n'existe pas", nBus);
+}
+
 
 // 6. la sauvegarde des données dans un fichier (mise à jour du fichier ou création d’un nouveau fichier)
 
