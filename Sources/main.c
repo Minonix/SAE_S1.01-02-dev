@@ -163,7 +163,7 @@ char **parsec_ligne(char *ligne, const char delimiter)
 {
     char *debut = ligne;
     char *fin;
-    int i, x = 0;
+    int x = 0;
     char **list_item = calloc(62, sizeof(char *));
     if (!list_item)
         return NULL;

@@ -38,7 +38,7 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]);
 void afficheInfoTrajet(Trajet trajet, int numbus);
 
 // 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
-void afficheTrajetTriés(Trajet trajet);
+void afficheTrajetTries(Trajet trajet);
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
 void ajoutSupprClients(Trajet trajet, int numbus);
@@ -63,7 +63,7 @@ void filtreTrajets2(Trajet trajet, char ville[50], char dateDepart[11], char hor
 
 // 9. l’affichage des trajets triés par chiffre d’affaires (différence entre les prix des billets payés par les
 // passagers et le coût du trajet supporté par l’entreprise), avec affichage de ce chiffre d’affaires
-void affichageTrajetTriésCA(Trajet trajet);
+void affichageTrajetTriesCA(Trajet trajet);
 
 // 10. la possibilité de supprimer tous les bus avec un chiffre d’affaires négatif, en répartissant les passagers sur les trajets identiques,
 // en priorisant les passagers ayant payé le plus sur les dates et horaires les plus proches du trajet initial. Il faudra indiquer le gain généré par cette opération
