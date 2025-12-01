@@ -33,15 +33,15 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]){
 // 5
 void modificationClients(int nb, Trajet* lTrajet, int nBus, Passager client ){
     int trouve = 0; // si un client est trouvé pour un trajet donné.
-    for (int i=0; i<nb && !trouve; i++){ // On cherche le bus ayant pour numéro bus nBus
+    for (int i=0; i<nb && !trouve ; i++){ // On cherche le bus ayant pour numéro bus nBus // debut for1
         if (lTrajet[i].numbus == nBus){ //On le trouve
             int j;
-            for (j=0; j<55 && lTrajet[i].listePassagers[j].nom[0]!=0 && !trouve; j++){ // On cherche le passager
+            for (j=0; j<55 && lTrajet[i].listePassagers[j].nom[0]!=0 && !trouve ; j++){ // On cherche le passager // debut for2
                 if (lTrajet[i].listePassagers[j].id == client.id){ // On le trouve
                     copie_str(lTrajet[i].listePassagers[j].nom, client.nom); // On change son nom par le nouveau nom qui peut être identifique au premier
                     lTrajet[i].listePassagers[j].prixbillet = client.prixbillet; // On change le prix de son billet
                     trouve = 1;} // On a fait ce que l'on voulait faire, le programme vas donc s'arreter.
-            } // fin for
+            } // fin for2
             if (!trouve){
                 if (j>54){
                     printf("Le bus %d est complet.", lTrajet[i].numbus);}
@@ -51,7 +51,7 @@ void modificationClients(int nb, Trajet* lTrajet, int nBus, Passager client ){
             } // fin if
 
         } //fin if
-    } // fin for
+    } // fin for1
     if (!trouve)printf("Le bus %d n'existe pas", nBus);
 }
 
