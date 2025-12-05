@@ -11,7 +11,7 @@ int main(void)
 {
     char chemin[50] = "test.csv";
     int nb_c = 0;
-    printf("Veiliier renseinger le chemin vers le CSV : \n");
+    printf("Veullier renseinger le chemin vers le CSV : \n");
     // scanf("%s", &chemin); //! retirer le \n en haut
     int nb_l = count_file(chemin, &nb_c);
     Trajet *fichier = calloc(nb_l, sizeof(Trajet));
@@ -112,7 +112,7 @@ void parsec(char *chemin, int nb, Trajet result[nb], int nb_c)
     buffer = malloc(sizeof(char) * (nb_c + 1));
     if (buffer == NULL)
     {
-        printf("buffer, na pus trouver de l'espace");
+        printf("buffer, n'a pus trouver de l'espace");
         return;
     }
 
@@ -139,7 +139,7 @@ void parsec(char *chemin, int nb, Trajet result[nb], int nb_c)
         int b = 0;
         for (int a = 6; list_item[a] != NULL; a++, b++)
         {
-            char **list_pass = parsec_ligne(list_item[a], ':');
+            char **list_pass = parsec_ligne(list_item[a], ':    ');
             result[x].listePassagers[b].id = atoi(list_pass[0]);
             strcpy(result[x].listePassagers[b].nom, list_pass[1]);
             result[x].listePassagers[b].prixbillet = atof(list_pass[2]);
