@@ -14,6 +14,7 @@ typedef struct {
     char dateDepart[11];
     char horaireDepart[5];
     char horaireArrivee[5];
+    int nb_passager;
     Passager listePassagers[56];
 } Trajet ;
 
@@ -25,6 +26,7 @@ Post_condition : Copie la chaine c2 dans la chaine c1
 */
 void copie_str(char* c1, char* c2);
 
+int str_cmp(char* ch1, char* ch2);
 
 /* 1
 Parametres : nb un int, lTrajet un tableau de nb éléments contennant des struct Trajet
@@ -38,7 +40,7 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]);
 void afficheInfoTrajet(Trajet trajet, int numbus);
 
 // 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
-void afficheTrajetTries(Trajet trajet);
+void afficheTrajetTries(int nb, Trajet* trajet);
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
 void ajoutSupprClients(Trajet trajet, int numbus);

@@ -9,7 +9,7 @@ char **parsec_ligne(char *ligne, const char delimiter);
 
 int main(void)
 {
-    char chemin[50] = "test.csv";
+    char chemin[50] = "trajets_10.csv";
     int nb_c = 0;
     printf("Veullier renseinger le chemin vers le CSV : \n");
     // scanf("%s", &chemin); //! retirer le \n en haut
@@ -24,34 +24,53 @@ int main(void)
     // DEBUT ZONE DE TEST
     // ==========================================
 
-    printf("\n\n--- RÉSULTAT DU PARSING (%d trajets trouvés) ---\n", nb_l);
 
-    for (int i = 0; i < nb_l; i++)
-    {
-        printf("------------------------------------------------\n");
-        printf("[TRAJET %d]\n", i + 1);
-        printf("  Bus ID   : %d\n", fichier[i].numbus);
-        printf("  Depart   : %s (Ville: %s)\n", fichier[i].horaireDepart, fichier[i].villeDepart);
-        printf("  Arrivee  : %s (Ville: %s)\n", fichier[i].horaireArrivee, fichier[i].villeArrivee);
-        printf("  Date     : %s\n", fichier[i].dateDepart);
-
-        printf("  Passagers :\n");
-        // On suppose ici que la liste de passagers est remplie.
-        // Note : Il serait bien d'avoir un champ 'nb_passagers' dans ta struct Trajet
-        // Ici, j'affiche les 5 premiers pour tester, ou jusqu'à ce que l'ID soit 0
-        for (int p = 0; p < 55; p++)
-        {
-            // Condition simple pour ne pas afficher des passagers vides (ajuste selon ta struct)
-            if (fichier[i].listePassagers[p].id != 0)
-            {
-                printf("    - ID: %d | Nom: %s | Prix: %.2f\n",
-                       fichier[i].listePassagers[p].id,
-                       fichier[i].listePassagers[p].nom,
-                       fichier[i].listePassagers[p].prixbillet);
-            }
-        }
+    Passager pass1[56];
+    for (int i=0; i<56; i++){
+        pass1[i].id = i+ 51;
+        pass1[i].nom[0] = 'a';
+        pass1[i].prixbillet = i*7+98/5.763;
     }
-    printf("------------------------------------------------\n");
+
+
+    afficherTrajet(nb_l, fichier);
+    for (int i=0; i<56; i++){
+        printf("id : %d Nom : %s  prix : %lf\n",fichier[0].listePassagers[i].id,fichier[0].listePassagers[i].nom,fichier[0].listePassagers[i].prixbillet);
+    }
+    for (int i=0; i<56; i++)modificationClients(nb_l, fichier, 4368, pass1[i]);
+    for (int i=0; i<56; i++){
+        printf("id : %d Nom : %s  prix : %lf\n",fichier[0].listePassagers[i].id,fichier[0].listePassagers[i].nom,fichier[0].listePassagers[i].prixbillet);
+    }
+
+
+    // printf("\n\n--- RÉSULTAT DU PARSING (%d trajets trouvés) ---\n", nb_l);
+
+    // for (int i = 0; i < nb_l; i++)
+    // {
+    //     printf("------------------------------------------------\n");
+    //     printf("[TRAJET %d]\n", i + 1);
+    //     printf("  Bus ID   : %d\n", fichier[i].numbus);
+    //     printf("  Depart   : %s (Ville: %s)\n", fichier[i].horaireDepart, fichier[i].villeDepart);
+    //     printf("  Arrivee  : %s (Ville: %s)\n", fichier[i].horaireArrivee, fichier[i].villeArrivee);
+    //     printf("  Date     : %s\n", fichier[i].dateDepart);
+
+    //     printf("  Passagers :\n");
+    //     // On suppose ici que la liste de passagers est remplie.
+    //     // Note : Il serait bien d'avoir un champ 'nb_passagers' dans ta struct Trajet
+    //     // Ici, j'affiche les 5 premiers pour tester, ou jusqu'à ce que l'ID soit 0
+    //     for (int p = 0; p < 55; p++)
+    //     {
+    //         // Condition simple pour ne pas afficher des passagers vides (ajuste selon ta struct)
+    //         if (fichier[i].listePassagers[p].id != 0)
+    //         {
+    //             printf("    - ID: %d | Nom: %s | Prix: %.2f\n",
+    //                    fichier[i].listePassagers[p].id,
+    //                    fichier[i].listePassagers[p].nom,
+    //                    fichier[i].listePassagers[p].prixbillet);
+    //         }
+    //     }
+    // }
+    // printf("------------------------------------------------\n");
     // ==========================================
     // FIN ZONE DE TEST
     // ==========================================
