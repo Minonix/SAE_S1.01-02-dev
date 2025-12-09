@@ -5,7 +5,7 @@ CC = gcc
 # -Wall -Wextra -Werror: Affiche tous les avertissements utiles
 # -g3 : Ajoute les informations de débogage
 # -IHeaders : Spécifie que les fichiers d'en-tête (.h) se trouvent dans le dossier Headers
-CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders 
+CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders -Wl,--stack=17000000
 
 # Nom de l'exécutable final
 EXEC = main.exe
@@ -30,7 +30,7 @@ $(EXEC): $(OBJS)
 # $@ est le nom de la cible (ex: obj/main.o)
 # $< est le nom de la première dépendance (ex: Sources/main.c)
 $(OBJDIR)/%.o: Sources/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $< 
 
 # Règle pour créer le dossier des objets s'il n'existe pas
 $(OBJDIR):

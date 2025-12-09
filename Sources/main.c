@@ -139,7 +139,7 @@ void parsec(char *chemin, int nb, Trajet result[nb], int nb_c)
         int b = 0;
         for (int a = 6; list_item[a] != NULL; a++, b++)
         {
-            char **list_pass = parsec_ligne(list_item[a], ':    ');
+            char **list_pass = parsec_ligne(list_item[a], ':');
             result[x].listePassagers[b].id = atoi(list_pass[0]);
             strcpy(result[x].listePassagers[b].nom, list_pass[1]);
             result[x].listePassagers[b].prixbillet = atof(list_pass[2]);
