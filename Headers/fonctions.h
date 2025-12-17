@@ -1,6 +1,12 @@
 #ifndef FONCTIONS_H_INCLUDED
 #define FONCTIONS_H_INCLUDED
 
+
+typedef struct {
+    int jour;
+    int mois;
+    int annee;
+} Date;
 typedef struct {
     int id;
     char nom[50];
@@ -11,7 +17,7 @@ typedef struct {
     int numbus;
     char villeDepart[50];
     char villeArrivee[50];
-    char dateDepart[11];
+    Date dateDepart;
     char horaireDepart[5];
     char horaireArrivee[5];
     int nb_passager;
