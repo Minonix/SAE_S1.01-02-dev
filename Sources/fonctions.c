@@ -48,9 +48,18 @@ void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]){
     }
 }
 
+void afficherTrajet(Trajet lTrajet){
+    printf("Voici la liste de tout les trajets : \n");
+            printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet.villeDepart, lTrajet.villeArrivee,
+                lTrajet.dateDepart.jour, lTrajet.dateDepart.mois, lTrajet.dateDepart.annee);
+            if (lTrajet.horaireDepart[0] != 0) printf("Horaire de Départ : %6s | ",lTrajet.horaireDepart);
+            else printf("Horaire de Départ : ABSENT | ");
+            if (lTrajet.horaireArrivee[0] != 0) printf("Horaire d'arrivée : %6s\n",lTrajet.horaireArrivee);
+            else  printf("Horaire d'arrivée : ABSENT\n");
+}
 
 //1
-void afficherTrajet(int nb, Trajet lTrajet[nb]){
+void affichernTrajet(int nb, Trajet lTrajet[nb]){
     printf("Voici la liste de tout les trajets : \n");
     for (int i=0; i<nb; i++) {  //Parcours de tout les trajets.
             printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet[i].villeDepart, lTrajet[i].villeArrivee,
@@ -59,13 +68,20 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]){
             else printf("Horaire de Départ : ABSENT | ");
             if (lTrajet[i].horaireArrivee[0] != 0) printf("Horaire d'arrivée : %6s\n",lTrajet[i].horaireArrivee);
             else  printf("Horaire d'arrivée : ABSENT\n");
-
-
     }
 }
 
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
+void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus) {
+    for (int i = 0; i < nb; i++ ) {
+        if (trajet[i].numbus == numbus){
+            afficherTrajet(trajet[i]);
+            return ;
+        }
+    }
+    printf("aucun trajet n'a été trouver\n");
+}
 
 // 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
@@ -77,7 +93,6 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
         printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d \n",lTrajet[T[i]].villeDepart, lTrajet[T[i]].villeArrivee,
             lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee);
     }
-
 }
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients

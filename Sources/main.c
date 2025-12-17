@@ -11,7 +11,7 @@ void parsec_date(char *date, Trajet *trajet);
 // --- MAIN ---
 int main(void)
 {
-    char chemin[50] = "trajets_10.csv";
+    char chemin[50] = "test.csv";
     int nb_l = count_lines(chemin);
 
     if (nb_l <= 0)
@@ -21,9 +21,10 @@ int main(void)
     }
 
     Trajet fichier[nb_l];
-
     parsec(chemin, nb_l, fichier);
-    afficherTrajetTrie(nb_l, fichier);
+    afficheInfoTrajet(nb_l, fichier, 7112);
+    printf("test");
+    // // afficheInfoTrajet(nb_l)
     // // --- AFFICHAGE TEST ---
     // printf("\n--- RESULTAT (%d trajets) ---\n", nb_l);
     // for (int i = 0; i < nb_l; i++)
@@ -44,7 +45,7 @@ int main(void)
     // }
     // printf("------------------------------------------------\n");
 
-    // return 0;
+    return 0;
 }
 
 int count_lines(char *chemin)
@@ -104,9 +105,8 @@ void parsec(char *chemin, int nb, Trajet fichier[nb])
 
         curseur = extraire_token(curseur, fichier[i].villeDepart, ',');
         curseur = extraire_token(curseur, fichier[i].villeArrivee, ',');
-        char date[15];
-        curseur = extraire_token(curseur, date, ',');
-        parsec_date(date, &fichier[i]);
+        curseur = extraire_token(curseur, temp, ',');
+        parsec_date(temp, &fichier[i]);
         curseur = extraire_token(curseur, fichier[i].horaireDepart, ',');
         curseur = extraire_token(curseur, fichier[i].horaireArrivee, ',');
 

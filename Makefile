@@ -5,9 +5,12 @@ CC = gcc
 # -Wall -Wextra -Werror: Affiche tous les avertissements utiles
 # -g3 : Ajoute les informations de débogage
 # -IHeaders : Spécifie que les fichiers d'en-tête (.h) se trouvent dans le dossier Headers
-CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders -Wl,-z,stack-size=16777216
-#! -Wl,--stack=16777216 pour windows
-#! -Wl,-z,stack-size=16777216
+CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders
+
+#pour windows :
+LDFLAGS = -Wl,--stack=167772160
+#pour Linux
+# LDFLAGS = -Wl,-z,stack-size=16777216
 
 
 # Nom de l'exécutable final
@@ -27,7 +30,7 @@ all: $(EXEC)
 
 # Règle pour créer l'exécutable à partir des fichiers objets
 $(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 # Règle pour compiler les fichiers sources (.c) en fichiers objets (.o)
 # $@ est le nom de la cible (ex: obj/main.o)

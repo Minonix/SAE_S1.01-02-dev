@@ -3,13 +3,6 @@
 
 
 typedef struct {
-    int jour;
-    int mois;
-    int annee;
-} Date;
-
-
-typedef struct {
     int id;
     char nom[50];
     double prixbillet;
@@ -51,16 +44,18 @@ int est_avant(Date d1, Date d2);
 
 void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]);
 
+void afficherTrajet(Trajet lTrajet);
+
 /* 1
 Parametres : nb un int, lTrajet un tableau de nb éléments contennant des struct Trajet
 Pré-condition : aucune
 Post-condition : L’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et d’arrivée)
 */
-void afficherTrajet(int nb, Trajet lTrajet[nb]);
+void affichernTrajet(int nb, Trajet lTrajet[nb]);
 
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
-void afficheInfoTrajet(Trajet trajet, int numbus);
+void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus);
 
 // 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb]);
