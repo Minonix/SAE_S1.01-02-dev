@@ -8,6 +8,7 @@ typedef struct {
     int annee;
 } Date;
 
+
 typedef struct {
     int id;
     char nom[50];
