@@ -8,10 +8,16 @@ typedef struct {
 } Passager;
 
 typedef struct {
+    int jour;
+    int mois;
+    int annee;
+}Date;
+
+typedef struct {
     int numbus;
     char villeDepart[50];
     char villeArrivee[50];
-    char dateDepart[11];
+    Date dateDepart;
     char horaireDepart[5];
     char horaireArrivee[5];
     int nb_passager;
@@ -28,6 +34,15 @@ void copie_str(char* c1, char* c2);
 
 int str_cmp(char* ch1, char* ch2);
 
+/**
+* entrées d1, d2: Date
+* sortie avant: int
+* post-cond: avant vaut 1 si d1 ≤ d2. Sinon, avant vaut 0.
+*/
+int est_avant(Date d1, Date d2);
+
+void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]);
+
 /* 1
 Parametres : nb un int, lTrajet un tableau de nb éléments contennant des struct Trajet
 Pré-condition : aucune
@@ -40,7 +55,7 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]);
 void afficheInfoTrajet(Trajet trajet, int numbus);
 
 // 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
-void afficheTrajetTries(int nb, Trajet* trajet);
+void afficherTrajetTrie(int nb, Trajet lTrajet[nb]);
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
 void ajoutSupprClients(Trajet trajet, int numbus);
