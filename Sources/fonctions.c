@@ -17,8 +17,8 @@ void copie_str(char* c1, char* c2){
 void afficherTrajet(int nb, Trajet lTrajet[nb]){
     printf("Voici la liste de tout les trajets : \n");
     for (int i=0; i<nb; i++) {  //Parcours de tout les trajets.
-            printf("Ville de départ : %s ; Ville d'arrivée : %s ; Date de départ : %s ; Horaire de Départ : %s ; Horaire d'arrivée : %s", // affichage des trajets
-            lTrajet[i].villeDepart, lTrajet[i].villeArrivee, lTrajet[i].dateDepart, lTrajet[i].horaireDepart, lTrajet[i].horaireArrivee);
+            printf("Ville de départ : %s ; Ville d'arrivée : %s ; Date de départ : %2d/%2d/%d ; Horaire de Départ : %s ; Horaire d'arrivée : %s", // affichage des trajets
+            lTrajet[i].villeDepart, lTrajet[i].villeArrivee,  lTrajet[i].dateDepart.jour, lTrajet[i].dateDepart.mois, lTrajet[i].dateDepart.annee, lTrajet[i].horaireDepart, lTrajet[i].horaireArrivee);
     }
 }
 

@@ -5,7 +5,7 @@ CC = gcc
 # -Wall -Wextra -Werror: Affiche tous les avertissements utiles
 # -g3 : Ajoute les informations de débogage
 # -IHeaders : Spécifie que les fichiers d'en-tête (.h) se trouvent dans le dossier Headers
-CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders -Wl,--stack=16777216
+CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders -Wl,--stack=167772160
 #! -Wl,--stack=16777216 pour windows
 #! -Wl,-z,stack-size=16777216
 
