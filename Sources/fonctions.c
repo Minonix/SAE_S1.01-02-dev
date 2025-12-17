@@ -76,8 +76,9 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
 
     tri_selection_indirect(nb, lTrajet, T);
     for (int i=0; i<nb; i++){
-        printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d \n",lTrajet[T[i]].villeDepart, lTrajet[T[i]].villeArrivee,
-            lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee);
+        printf("NumBus : %d | Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | Horaire de départ : %6s | Horaire d'arrivée : %6s\n",lTrajet[T[i]].numbus,
+            lTrajet[T[i]].villeDepart, lTrajet[T[i]].villeArrivee,
+            lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee,lTrajet[T[i]].horaireDepart, lTrajet[T[i]].horaireArrivee);
     }
 
 }
