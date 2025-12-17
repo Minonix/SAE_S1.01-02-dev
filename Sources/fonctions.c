@@ -34,19 +34,21 @@ void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]){
     int temp ;
         for (int i = 0 ; i < n-1 ; i++) {
             int j_mini = i ;
-            for (int j = i+1 ; j < n ; j++)
+            for (int j = i+1 ; j < n ; j++){
                 if ( str_cmp(lTrajet[T[j]].villeDepart, lTrajet[T[j_mini]].villeDepart) == 0 ){
-                    if (est_avant(lTrajet[T[j_mini]].dateDepart, lTrajet[T[j]].dateDepart) )
+                    if (est_avant(lTrajet[T[j]].dateDepart,lTrajet[T[j_mini]].dateDepart) )
                         j_mini = j;
                 }
-                else if  ( str_cmp(lTrajet[T[j]].villeDepart, lTrajet[T[j_mini]].villeDepart) ){
+                if  (  str_cmp(lTrajet[T[j_mini]].villeDepart,lTrajet[T[j]].villeDepart) > 0 ){
                     j_mini = j ;
                 }
+            }
             temp = T[i] ;
             T[i] = T[j_mini] ;
             T[j_mini] = temp ;
     }
 }
+
 
 
 //1

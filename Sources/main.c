@@ -11,7 +11,7 @@ void parsec_date(char *date, Trajet *trajet);
 // --- MAIN ---
 int main(void)
 {
-    char chemin[50] = "trajets_10.csv";
+    char chemin[50] = "trajets_bus.csv";
     int nb_l = count_lines(chemin);
 
     if (nb_l <= 0)
