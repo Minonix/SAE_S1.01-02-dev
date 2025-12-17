@@ -7,6 +7,7 @@ typedef struct {
     int mois;
     int annee;
 } Date;
+
 typedef struct {
     int id;
     char nom[50];
