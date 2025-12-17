@@ -159,6 +159,7 @@ void parsec_ligne(char *ligne, const char delimiter, char list_item[62][50]);
 int main(void)
 
 {
+    char chemin[50] = "trajets_10.csv";
 
     char chemin[50] = "trajets_10.csv";
 
