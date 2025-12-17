@@ -21,19 +21,30 @@ int str_cmp(char* ch1, char* ch2){
     return ch1[i] - ch2[i];
 }
 
-void tri_selection(int n, int tab[n]){
-    int i_mini;
-    int tmp;
-    for (int i=0; i<n-1; i++){
-        i_mini = i;
-        for (int j=i_mini+1; j<n; j++){
-            if (tab[i_mini]>tab[j]) {
-                i_mini=j;
-            }
-        }
-        tmp=tab[i];
-        tab[i]=tab[i_mini];
-        tab[i_mini]= tmp;
+int est_avant(Date d1, Date d2){
+    if (d1.annee > d2.annee) return 0;
+    else if (d1.annee < d2.annee) return 1;
+    if (d1.mois > d2.mois) return 0;
+    else if (d1.mois < d2.mois) return 1;
+    if (d1.jour > d2.jour) return 0;
+    return 1;
+}
+
+void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]){
+    int temp ;
+        for (int i = 0 ; i < n-1 ; i++) {
+            int j_mini = i ;
+            for (int j = i+1 ; j < n ; j++)
+                if ( str_cmp(lTrajet[T[j]].villeDepart, lTrajet[T[j_mini]].villeDepart) == 0 ){
+                    if (est_avant(lTrajet[T[j_mini]].dateDepart, lTrajet[T[j]].dateDepart) )
+                        j_mini = j;
+                }
+                else if  ( str_cmp(lTrajet[T[j]].villeDepart, lTrajet[T[j_mini]].villeDepart) ){
+                    j_mini = j ;
+                }
+            temp = T[i] ;
+            T[i] = T[j_mini] ;
+            T[j_mini] = temp ;
     }
 }
 
@@ -42,7 +53,8 @@ void tri_selection(int n, int tab[n]){
 void afficherTrajet(int nb, Trajet lTrajet[nb]){
     printf("Voici la liste de tout les trajets : \n");
     for (int i=0; i<nb; i++) {  //Parcours de tout les trajets.
-            printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %10s | ",lTrajet[i].villeDepart, lTrajet[i].villeArrivee, lTrajet[i].dateDepart);
+            printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet[i].villeDepart, lTrajet[i].villeArrivee,
+                lTrajet[i].dateDepart.jour, lTrajet[i].dateDepart.mois, lTrajet[i].dateDepart.annee);
             if (lTrajet[i].horaireDepart[0] != 0) printf("Horaire de Départ : %6s | ",lTrajet[i].horaireDepart);
             else printf("Horaire de Départ : ABSENT | ");
             if (lTrajet[i].horaireArrivee[0] != 0) printf("Horaire d'arrivée : %6s\n",lTrajet[i].horaireArrivee);
@@ -56,7 +68,16 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]){
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
 
 // 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
+void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
+    int T[nb];
+    for (int i=0; i<nb; i++)T[i]=i;
+    tri_selection_indirect(nb, lTrajet, T);
+    for (int i=0; i<nb; i++){
+        printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet[i].villeDepart, lTrajet[i].villeArrivee,
+            lTrajet[i].dateDepart.jour, lTrajet[i].dateDepart.mois, lTrajet[i].dateDepart.annee);
+    }
 
+}
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
 
