@@ -71,10 +71,11 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]){
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
     int T[nb];
     for (int i=0; i<nb; i++)T[i]=i;
+
     tri_selection_indirect(nb, lTrajet, T);
     for (int i=0; i<nb; i++){
-        printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet[i].villeDepart, lTrajet[i].villeArrivee,
-            lTrajet[i].dateDepart.jour, lTrajet[i].dateDepart.mois, lTrajet[i].dateDepart.annee);
+        printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d \n",lTrajet[T[i]].villeDepart, lTrajet[T[i]].villeArrivee,
+            lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee);
     }
 
 }

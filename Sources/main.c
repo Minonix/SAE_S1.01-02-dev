@@ -11,7 +11,7 @@ void parsec_date(char *date, Trajet *trajet);
 // --- MAIN ---
 int main(void)
 {
-    char chemin[50] = "test.csv";
+    char chemin[50] = "trajets_10.csv";
     int nb_l = count_lines(chemin);
 
     if (nb_l <= 0)
@@ -23,28 +23,28 @@ int main(void)
     Trajet fichier[nb_l];
 
     parsec(chemin, nb_l, fichier);
+    afficherTrajetTrie(nb_l, fichier);
+    // // --- AFFICHAGE TEST ---
+    // printf("\n--- RESULTAT (%d trajets) ---\n", nb_l);
+    // for (int i = 0; i < nb_l; i++)
+    // {
+    //     printf("------------------------------------------------\n");
+    //     printf("[TRAJET %d] Bus: %d | %s (%02d/%02d/%d) -> %s\n",
+    //            i + 1, fichier[i].numbus, fichier[i].villeDepart, fichier[i].dateDepart.jour, fichier[i].dateDepart.mois, fichier[i].dateDepart.annee, fichier[i].villeArrivee);
 
-    // --- AFFICHAGE TEST ---
-    printf("\n--- RESULTAT (%d trajets) ---\n", nb_l);
-    for (int i = 0; i < nb_l; i++)
-    {
-        printf("------------------------------------------------\n");
-        printf("[TRAJET %d] Bus: %d | %s (%02d/%02d/%d) -> %s\n",
-               i + 1, fichier[i].numbus, fichier[i].villeDepart, fichier[i].dateDepart.jour, fichier[i].dateDepart.mois, fichier[i].dateDepart.annee, fichier[i].villeArrivee);
+    //     for (int p = 0; p < fichier[i].nb_passager; p++)
+    //     {
+    //         // On affiche même si les données sont partielles (vide)
+    //         printf("    Passager %d: ID=%d, Nom='%s', Prix=%.2f\n",
+    //                p + 1,
+    //                fichier[i].listePassagers[p].id,
+    //                fichier[i].listePassagers[p].nom,
+    //                fichier[i].listePassagers[p].prixbillet);
+    //     }
+    // }
+    // printf("------------------------------------------------\n");
 
-        for (int p = 0; p < fichier[i].nb_passager; p++)
-        {
-            // On affiche même si les données sont partielles (vide)
-            printf("    Passager %d: ID=%d, Nom='%s', Prix=%.2f\n",
-                   p + 1,
-                   fichier[i].listePassagers[p].id,
-                   fichier[i].listePassagers[p].nom,
-                   fichier[i].listePassagers[p].prixbillet);
-        }
-    }
-    printf("------------------------------------------------\n");
-
-    return 0;
+    // return 0;
 }
 
 int count_lines(char *chemin)

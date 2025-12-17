@@ -2,11 +2,7 @@
 #define FONCTIONS_H_INCLUDED
 
 
-typedef struct {
-    int jour;
-    int mois;
-    int annee;
-} Date;
+
 typedef struct {
     int id;
     char nom[50];
