@@ -43,6 +43,9 @@ int str_cmp(char* ch1, char* ch2);
 */
 int est_avant(Date d1, Date d2);
 
+void afficherhoraire(char* horaire);
+
+
 void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]);
 
 /* 1

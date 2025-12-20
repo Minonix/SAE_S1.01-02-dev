@@ -49,6 +49,12 @@ void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]){
     }
 }
 
+void afficherhoraire(char* horaire){
+    if (horaire[0]==0)printf("ABSENT");
+    else {
+        printf(" %c%c:%c%c",horaire[0],horaire[1],horaire[2],horaire[3]);
+    }
+}
 
 
 //1
@@ -57,12 +63,12 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]){
     for (int i=0; i<nb; i++) {  //Parcours de tout les trajets.
             printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet[i].villeDepart, lTrajet[i].villeArrivee,
                 lTrajet[i].dateDepart.jour, lTrajet[i].dateDepart.mois, lTrajet[i].dateDepart.annee);
-            if (lTrajet[i].horaireDepart[0] != 0) printf("Horaire de Départ : %6s | ",lTrajet[i].horaireDepart);
-            else printf("Horaire de Départ : ABSENT | ");
-            if (lTrajet[i].horaireArrivee[0] != 0) printf("Horaire d'arrivée : %6s\n",lTrajet[i].horaireArrivee);
-            else  printf("Horaire d'arrivée : ABSENT\n");
-
-
+            printf("Horaire de départ : ");
+            afficherhoraire( lTrajet[i].horaireDepart);
+            printf(" | ");
+            printf("Horaire d'arrivée : ");
+            afficherhoraire( lTrajet[i].horaireArrivee);
+            printf("\n");
     }
 }
 
@@ -76,9 +82,15 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
 
     tri_selection_indirect(nb, lTrajet, T);
     for (int i=0; i<nb; i++){
-        printf("NumBus : %d | Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | Horaire de départ : %6s | Horaire d'arrivée : %6s\n",lTrajet[T[i]].numbus,
+        printf("NumBus : %d | Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet[T[i]].numbus,
             lTrajet[T[i]].villeDepart, lTrajet[T[i]].villeArrivee,
-            lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee,lTrajet[T[i]].horaireDepart, lTrajet[T[i]].horaireArrivee);
+            lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee);
+        printf("Horaire de départ : ");
+        afficherhoraire( lTrajet[i].horaireDepart);
+        printf(" | ");
+        printf("Horaire d'arrivée : ");
+        afficherhoraire( lTrajet[i].horaireArrivee);
+        printf("\n");
     }
 
 }
