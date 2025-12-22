@@ -22,6 +22,9 @@ int str_cmp(char* ch1, char* ch2){
 }
 
 int est_avant(Date d1, Date d2){
+    if (d1.annee == d2.annee && d1.mois == d2.mois && d1.jour == d2.jour) {
+            return 2;
+        }
     if (d1.annee > d2.annee) return 0;
     else if (d1.annee < d2.annee) return 1;
     if (d1.mois > d2.mois) return 0;
@@ -61,6 +64,7 @@ void afficherhoraire(char* horaire){
 void afficherTrajet(int nb, Trajet lTrajet[nb]){
     printf("Voici la liste de tout les trajets : \n");
     for (int i=0; i<nb; i++) {  //Parcours de tout les trajets.
+        if (lTrajet[i].numbus!=0){
             printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet[i].villeDepart, lTrajet[i].villeArrivee,
                 lTrajet[i].dateDepart.jour, lTrajet[i].dateDepart.mois, lTrajet[i].dateDepart.annee);
             printf("Horaire de départ : ");
@@ -69,6 +73,7 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]){
             printf("Horaire d'arrivée : ");
             afficherhoraire( lTrajet[i].horaireArrivee);
             printf("\n");
+        }
     }
 }
 
@@ -82,6 +87,7 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
 
     tri_selection_indirect(nb, lTrajet, T);
     for (int i=0; i<nb; i++){
+        if (lTrajet[i].numbus!=0){
         printf("NumBus : %d | Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet[T[i]].numbus,
             lTrajet[T[i]].villeDepart, lTrajet[T[i]].villeArrivee,
             lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee);
@@ -91,6 +97,7 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
         printf("Horaire d'arrivée : ");
         afficherhoraire( lTrajet[i].horaireArrivee);
         printf("\n");
+        }
     }
 
 }
@@ -127,6 +134,20 @@ void modificationClients(int nb, Trajet* lTrajet, int nBus, Passager client ){
 // 6. la sauvegarde des données dans un fichier (mise à jour du fichier ou création d’un nouveau fichier)
 
 // 7. un filtre sur les trajets partant d’une ville, partant à une date, arrivant le lendemain
+int filtreTrajets1(int n, Trajet* lTrajet, Trajet* lTrajet_filtre, char ville[50], Date dateDepart){
+    int j=0;
+    for (int i=0; i<n; i++){
+        if ( est_avant(lTrajet[i].dateDepart, dateDepart) == 2 ){
+            if ( str_cmp(lTrajet[i].horaireArrivee, lTrajet[i].horaireDepart) <= 0 ){
+                if ( str_cmp(lTrajet[i].villeDepart, ville) == 0){
+                    lTrajet_filtre[j] = lTrajet[i];
+                    j++;
+                }
+            }
+        }
+    }
+    return j;
+}
 
 // 8. un filtre sur les trajets combinant ville de départ, ville d’arrivée et date de départ
 

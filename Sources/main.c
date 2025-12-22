@@ -22,8 +22,22 @@ int main(void)
 
     Trajet fichier[nb_l];
 
+    // Pour les tests
+    Trajet lTr_filt[nb_l];
+    char ville[50] = "Angers";
+    Date d1;
+    d1.jour=2;
+    d1.mois=11;
+    d1.annee=2026;
+    int ind;
+    //fin
+
     parsec(chemin, nb_l, fichier);
-    afficherTrajetTrie(nb_l, fichier);
+
+    ind = filtreTrajets1(nb_l, fichier, lTr_filt, ville, d1);
+    afficherTrajetTrie(ind, lTr_filt);
+
+
     // // --- AFFICHAGE TEST ---
     // printf("\n--- RESULTAT (%d trajets) ---\n", nb_l);
     // for (int i = 0; i < nb_l; i++)

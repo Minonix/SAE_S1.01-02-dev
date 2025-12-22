@@ -38,29 +38,51 @@ int str_cmp(char* ch1, char* ch2);
 
 /**
 * entrées d1, d2: Date
-* sortie avant: int
-* post-cond: avant vaut 1 si d1 ≤ d2. Sinon, avant vaut 0.
+* sortie : int
+* post-cond: return 1 si d1 < d2. Si d1> d2, return  0. Si d1=d2 return 2.
 */
 int est_avant(Date d1, Date d2);
 
+
+/*
+entrées : char* horaire
+pré-condition : un horaire est un tableau de forme hhmm, contennant 4 caracteres + le caractere \n de fin, horaire peut être vide.
+post-condition : affiche l'horaire sous la forme hh:mm
+*/
 void afficherhoraire(char* horaire);
 
 
-void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]);
+
 
 /* 1
-Parametres : nb un int, lTrajet un tableau de nb éléments contennant des struct Trajet
+Parametres : int nb , lTrajet un tableau de nb éléments contennant des struct Trajet
 Pré-condition : aucune
 Post-condition : L’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et d’arrivée)
 */
 void afficherTrajet(int nb, Trajet lTrajet[nb]);
 
+
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
 void afficheInfoTrajet(Trajet trajet, int numbus);
 
-// 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
+
+/* 3
+Parametres: int nb, lTrajet un tableau de nb éléments contennant des struct Trajet
+Pré-condition : Aucune
+Post-condition : L’affichage de tous les trajets triés par ville de départ et par date de départ
+*/
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb]);
+
+/* 3
+Parametres: int n, lTrajet un tableau de n éléments contennant des struct Trajet
+Parametres entrée/sortie : int T[n]
+Pré-condition : Aucune
+Post-condition, trie selection indirect du tableau ltrajet avec T comme tableau d'indice de lTrajet
+*/
+void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]);
+
+
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
 void ajoutSupprClients(Trajet trajet, int numbus);
@@ -78,7 +100,7 @@ void modificationClients(int nb, Trajet* lTrajet, int numbus, Passager client);
 void sauvegardeDonnees(Trajet trajet);
 
 // 7. un filtre sur les trajets partant d’une ville, partant à une date, arrivant le lendemain
-void filtreTrajets1(Trajet trajet, char ville[50], char dateDepart[11]);
+int filtreTrajets1(int n, Trajet* lTrajet, Trajet* lTrajet_filtre,char ville[50], Date dateDepart);
 
 // 8. un filtre sur les trajets combinant ville de départ, ville d’arrivée et date de départ
 void filtreTrajets2(Trajet trajet, char ville[50], char dateDepart[11], char horaireDepart[5]);
