@@ -34,7 +34,15 @@ Post_condition : Copie la chaine c2 dans la chaine c1
 */
 void copie_str(char* c1, char* c2);
 
+
+
+
 int str_cmp(char* ch1, char* ch2);
+
+
+
+double calcule_ca(Trajet trajet);
+
 
 /**
 * entrées d1, d2: Date
@@ -107,7 +115,9 @@ void filtreTrajets2(Trajet trajet, char ville[50], char dateDepart[11], char hor
 
 // 9. l’affichage des trajets triés par chiffre d’affaires (différence entre les prix des billets payés par les
 // passagers et le coût du trajet supporté par l’entreprise), avec affichage de ce chiffre d’affaires
-void affichageTrajetTriesCA(Trajet trajet);
+void affichageTrajetTriesCA(int nb, Trajet* lTrajet);
+
+void tri_selection_indirect_ca(int n, int T[n], double tCa[n]);
 
 // 10. la possibilité de supprimer tous les bus avec un chiffre d’affaires négatif, en répartissant les passagers sur les trajets identiques,
 // en priorisant les passagers ayant payé le plus sur les dates et horaires les plus proches du trajet initial. Il faudra indiquer le gain généré par cette opération

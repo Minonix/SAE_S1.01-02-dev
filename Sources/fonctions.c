@@ -52,6 +52,50 @@ void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]){
     }
 }
 
+
+double calcule_ca(Trajet trajet){
+    int hd, md, ha, ma;
+    double somme_billet=0.0;
+    int cout_bus=100;
+
+    if (trajet.horaireDepart[0]==0 || trajet.horaireArrivee[0]==0){return -99999.99;} //valeur arbitraire
+
+    sscanf(trajet.horaireDepart, "%2d%2d", &hd, &md);
+    sscanf(trajet.horaireArrivee, "%2d%2d", &ha, &ma);
+
+    int tDepart  = hd * 60 + md;
+    int tArrivee = ha * 60 + ma;
+
+    if (tArrivee < tDepart) {
+        tArrivee += 24 * 60; // passage de minuit
+    }
+    cout_bus+= ((tArrivee - tDepart + 59) / 60 ) * 50;
+
+    int i=0;
+    while (trajet.listePassagers[i].id <= 55 && trajet.listePassagers[i].id >= 0){
+        somme_billet+=trajet.listePassagers[i].prixbillet;
+        i++;
+    }
+    return somme_billet-cout_bus;
+}
+
+
+void tri_selection_indirect_ca(int n, int T[n], double tCa[n]){
+    int temp ;
+        for (int i = 0 ; i < n-1 ; i++) {
+            int j_mini = i ;
+            for (int j = i+1 ; j < n ; j++){
+                if  ( tCa[T[j]] < tCa[T[j_mini]]  ){
+                    j_mini = j ;
+                }
+            }
+            temp = T[i] ;
+            T[i] = T[j_mini] ;
+            T[j_mini] = temp ;
+    }
+}
+
+
 void afficherhoraire(char* horaire){
     if (horaire[0]==0)printf("ABSENT");
     else {
@@ -71,6 +115,7 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]){
             afficherhoraire( lTrajet[i].horaireDepart);
             printf(" | ");
             printf("Horaire d'arrivée : ");
+
             afficherhoraire( lTrajet[i].horaireArrivee);
             printf("\n");
         }
@@ -99,7 +144,6 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
         printf("\n");
         }
     }
-
 }
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
@@ -153,6 +197,36 @@ int filtreTrajets1(int n, Trajet* lTrajet, Trajet* lTrajet_filtre, char ville[50
 
 // 9. l’affichage des trajets triés par chiffre d’affaires (différence entre les prix des billets payés par les
 // passagers et le coût du trajet supporté par l’entreprise), avec affichage de ce chiffre d’affaires
+void affichageTrajetTriesCA(int nb, Trajet* lTrajet){
+    int T[nb];
+    double tCa[nb];
+    for (int i=0; i<nb; i++){
+        T[i]=i;
+        tCa[i] = calcule_ca(lTrajet[i]);
+    }
+
+    tri_selection_indirect_ca(nb, T, tCa);
+    for (int i=0; i<nb; i++){
+        if (lTrajet[T[i]].numbus!=0){
+        printf("NumBus : %d | Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet[T[i]].numbus,
+            lTrajet[T[i]].villeDepart, lTrajet[T[i]].villeArrivee,
+            lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee);
+        printf("Horaire de départ : ");
+        afficherhoraire( lTrajet[T[i]].horaireDepart);
+        printf(" | ");
+        printf("Horaire d'arrivée : ");
+        afficherhoraire( lTrajet[T[i]].horaireArrivee);
+        printf(" | ");
+        printf("Chiffre d'affaire : ");
+        if (tCa[T[i]] == -99999.99){
+            printf("CA INCONNU");
+        }
+        else printf("%8.2lf", tCa[T[i]]);
+        printf("\n");
+        }
+    }
+}
+
 
 // 10. la possibilité de supprimer tous les bus avec un chiffre d’affaires négatif, en répartissant les passagers
 // sur les trajets identiques, en priorisant les passagers ayant payé le plus sur les dates et horaires les plus
