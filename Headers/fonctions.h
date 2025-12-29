@@ -61,7 +61,7 @@ void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus);
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb]);
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
-void ajoutSupprClients(Trajet trajet, int numbus);
+void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_not);
 
 /* 5
 Parametres : int nb ; lTrajet, un pointeur vers un tableau contennant nb élément de type Trajet ; int nBus le numéro d'un bus (de type Trajet);

@@ -22,28 +22,32 @@ int main(void)
 
     Trajet fichier[nb_l];
     parsec(chemin, nb_l, fichier);
-    afficheInfoTrajet(nb_l, fichier, 7112);
-    printf("test");
+    // afficheInfoTrajet(nb_l, fichier, 7113);
+    Passager test = {30, "Martini", 12.50};
+    ajoutSupprClients(nb_l, fichier, 7112, test);
+    printf("\n");
+    // affichernTrajet(nb_l, fichier);
+    
     // // afficheInfoTrajet(nb_l)
     // // --- AFFICHAGE TEST ---
-    // printf("\n--- RESULTAT (%d trajets) ---\n", nb_l);
-    // for (int i = 0; i < nb_l; i++)
-    // {
-    //     printf("------------------------------------------------\n");
-    //     printf("[TRAJET %d] Bus: %d | %s (%02d/%02d/%d) -> %s\n",
-    //            i + 1, fichier[i].numbus, fichier[i].villeDepart, fichier[i].dateDepart.jour, fichier[i].dateDepart.mois, fichier[i].dateDepart.annee, fichier[i].villeArrivee);
+    printf("\n--- RESULTAT (%d trajets) ---\n", nb_l);
+    for (int i = 0; i < nb_l; i++)
+    {
+        printf("------------------------------------------------\n");
+        printf("[TRAJET %d] Bus: %d | %s (%02d/%02d/%d) -> %s\n",
+               i + 1, fichier[i].numbus, fichier[i].villeDepart, fichier[i].dateDepart.jour, fichier[i].dateDepart.mois, fichier[i].dateDepart.annee, fichier[i].villeArrivee);
 
-    //     for (int p = 0; p < fichier[i].nb_passager; p++)
-    //     {
-    //         // On affiche même si les données sont partielles (vide)
-    //         printf("    Passager %d: ID=%d, Nom='%s', Prix=%.2f\n",
-    //                p + 1,
-    //                fichier[i].listePassagers[p].id,
-    //                fichier[i].listePassagers[p].nom,
-    //                fichier[i].listePassagers[p].prixbillet);
-    //     }
-    // }
-    // printf("------------------------------------------------\n");
+        for (int p = 0; p < fichier[i].nb_passager; p++)
+        {
+            // On affiche même si les données sont partielles (vide)
+            printf("    Passager %d: ID=%d, Nom='%s', Prix=%.2f\n",
+                   p + 1,
+                   fichier[i].listePassagers[p].id,
+                   fichier[i].listePassagers[p].nom,
+                   fichier[i].listePassagers[p].prixbillet);
+        }
+    }
+    printf("------------------------------------------------\n");
 
     return 0;
 }
@@ -64,7 +68,7 @@ int count_lines(char *chemin)
     return lignes;
 }
 
-/* * Fonction outil pour simplifier le parsing.
+/** Fonction outil pour simplifier le parsing.
  * Lit 'src' jusqu'au 'separateur', copie dans 'dest', et retourne la suite.
  * Gère automatiquement les champs vides.
  */

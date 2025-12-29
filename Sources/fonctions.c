@@ -96,7 +96,28 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
 }
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
-
+void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_not) {
+    int a = 0;
+    for (int i = 0; i < nb; i++ ) {
+        if (trajet[i].numbus == numbus){
+            for (int y = 0; y < trajet[i].nb_passager; y++ ) {
+                if (trajet[i].listePassagers[y].id == new_or_not.id) a = 1;
+                if (a) trajet[i].listePassagers[y] = trajet[i].listePassagers[y+1];
+            }
+            if (a) {
+                trajet[i].nb_passager--;
+                printf("passager retirer");
+            } 
+            else {
+              trajet[i].listePassagers[trajet[i].nb_passager] = new_or_not;
+              trajet[i].nb_passager++;  
+              printf("passager ajouter");
+            }
+            return ;
+        }
+    }
+    printf("pas de trajet trouver");
+}
 
 // 5
 void modificationClients(int nb, Trajet* lTrajet, int nBus, Passager client ){
