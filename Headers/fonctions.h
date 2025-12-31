@@ -51,7 +51,7 @@ Parametres : nb un int, lTrajet un tableau de nb éléments contennant des struc
 Pré-condition : aucune
 Post-condition : L’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et d’arrivée)
 */
-void affichernTrajet(int nb, Trajet lTrajet[nb]);
+void afficherNTrajet(int nb, Trajet lTrajet[nb]);
 
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
@@ -73,7 +73,7 @@ Post-condition : à partir d'un numéro d’un bus et du numéro (id) d’un cli
 void modificationClients(int nb, Trajet* lTrajet, int numbus, Passager client);
 
 // 6. la sauvegarde des données dans un fichier (mise à jour du fichier ou création d’un nouveau fichier)
-void sauvegardeDonnees(Trajet trajet);
+void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name);
 
 // 7. un filtre sur les trajets partant d’une ville, partant à une date, arrivant le lendemain
 void filtreTrajets1(Trajet trajet, char ville[50], char dateDepart[11]);
