@@ -22,6 +22,67 @@ int main(void)
 
     Trajet fichier[nb_l];
 
+
+    //DEBUT MAIN
+    int choix=-1;
+    while (choix!=0){
+        printf("1 - Affichage des trajets\n");
+        printf("2 - Affichage des informations sur un trajet particulier\n");
+        printf("3 - Affichage des trajets triés par ville de départ et par date de départ\n");
+        printf("4 - Ajout et suppression de clients à partir du numéro d’un bus\n");
+        printf("5 - Modification ou ajout du nom du client ou du prix de son billet à partir du numéro d’un bus et de numéro (id) d’un client\n");
+        printf("6 - Sauvegarder les données dans un fichier\n");
+        printf("7 - Filtrage des trajets partant d’une ville, partant à une date, arrivant le lendemain\n");
+        printf("8 - Filtrage des trajets combinant ville de départ, ville d’arrivée et date de départ\n");
+        printf("9 - Affichage des trajets triés par chiffre d’affaires\n");
+        printf("10 - Supprimer tous les bus avec un chiffre d’affaires négatif\n");
+        printf("0 - Quitter\n");
+
+        printf("Entrer votre choix : ");
+        scanf("%d",&choix);
+
+        if      (choix==1) {
+
+
+        }
+        else if (choix==2) {
+
+
+        }
+        else if (choix==3) {
+
+
+        }
+        else if (choix==4) {
+
+
+        }
+        else if (choix==5) {
+
+
+        }
+        else if (choix==6) {
+
+
+        }
+        else if (choix==7) {
+
+
+        }
+        else if (choix==8) {
+
+
+        }
+        else if (choix==9) {
+
+
+        }
+        else if (choix==10) {
+
+
+        }
+    }
+
     // Pour les tests
     // Trajet lTr_filt[nb_l];
     // char ville[50] = "Angers";
