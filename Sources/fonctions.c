@@ -52,6 +52,15 @@ void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]){
     }
 }
 
+void afficherTrajet(Trajet lTrajet){
+    printf("Voici la liste de tout les trajets : \n");
+            printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ",lTrajet.villeDepart, lTrajet.villeArrivee,
+                lTrajet.dateDepart.jour, lTrajet.dateDepart.mois, lTrajet.dateDepart.annee);
+            if (lTrajet.horaireDepart[0] != 0) printf("Horaire de Départ : %6s | ",lTrajet.horaireDepart);
+            else printf("Horaire de Départ : ABSENT | ");
+            if (lTrajet.horaireArrivee[0] != 0) printf("Horaire d'arrivée : %6s\n",lTrajet.horaireArrivee);
+            else  printf("Horaire d'arrivée : ABSENT\n");
+}
 
 double calcule_ca(Trajet trajet){
     int hd, md, ha, ma;
@@ -105,7 +114,7 @@ void afficherhoraire(char* horaire){
 
 
 //1
-void afficherTrajet(int nb, Trajet lTrajet[nb]){
+void afficherNTrajet(int nb, Trajet lTrajet[nb]){
     printf("Voici la liste de tout les trajets : \n");
     for (int i=0; i<nb; i++) {  //Parcours de tout les trajets.
         if (lTrajet[i].numbus!=0){
@@ -124,6 +133,15 @@ void afficherTrajet(int nb, Trajet lTrajet[nb]){
 
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
+void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus) {
+    for (int i = 0; i < nb; i++ ) {
+        if (trajet[i].numbus == numbus){
+            afficherTrajet(trajet[i]);
+            return ;
+        }
+    }
+    printf("aucun trajet n'a été trouver\n");
+}
 
 // 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
@@ -147,7 +165,35 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]){
 }
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
-
+/**
+ * l'id n'a pas d'incidence, le nom est sensible a la casse
+ */
+void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_not) {
+    int a = 0;
+    for (int i = 0; i < nb; i++ ) {
+        if (trajet[i].numbus == numbus){ //une fois le bon trajet trouver
+            for (int y = 0; y < trajet[i].nb_passager; y++ ) { //on parcours tout les passager
+                if (str_cmp(trajet[i].listePassagers[y].nom, new_or_not.nom) == 0) a = 1; // si le nom du passager est le meme 
+                if (a) {
+                    trajet[i].listePassagers[y] = trajet[i].listePassagers[y+1]; // si un passager a été trouver alors on le remplace par le prochian passager
+                    trajet[i].listePassagers[y].id -= 1;
+                }
+            }
+            if (a) {
+                trajet[i].nb_passager--; 
+                printf("passager retirer");
+            } 
+            else {
+                trajet[i].nb_passager += 1;
+                new_or_not.id = trajet[i].nb_passager; // on ajuste l'id comme étant le derner id
+                trajet[i].listePassagers[trajet[i].nb_passager - 1] = new_or_not;
+                printf("passager ajouter");
+            }
+            return ;
+        }
+    }
+    printf("pas de trajet trouver");
+}
 
 // 5
 void modificationClients(int nb, Trajet* lTrajet, int nBus, Passager client ){
@@ -176,6 +222,36 @@ void modificationClients(int nb, Trajet* lTrajet, int nBus, Passager client ){
 
 
 // 6. la sauvegarde des données dans un fichier (mise à jour du fichier ou création d’un nouveau fichier)
+void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name) {
+    FILE *f = fopen(name, "w");
+    if (!f)
+        return;
+    for (int i = 0; i < nb; i++) {
+        fprintf(f, "%d,%s,%s,%02d/%02d/%02d,%s,%s,",
+        trajet[i].numbus,
+        trajet[i].villeDepart,
+        trajet[i].villeArrivee,
+        trajet[i].dateDepart.jour,
+        trajet[i].dateDepart.mois,
+        trajet[i].dateDepart.annee,
+        trajet[i].horaireDepart,
+        trajet[i].horaireArrivee
+        );
+        for (int p = 0; p < trajet[i].nb_passager; p++) {
+            fprintf(f, "%d:%s:%.2f",
+            trajet[i].listePassagers[p].id,
+            trajet[i].listePassagers[p].nom,
+            trajet[i].listePassagers[p].prixbillet
+            );
+            if (p < trajet[i].nb_passager - 1) {
+                fprintf(f, ",");
+            }
+        }
+        fprintf(f, "\n");
+    }
+    printf("sauvgarde effectuer \n");
+    fclose(f);
+}
 
 // 7. un filtre sur les trajets partant d’une ville, partant à une date, arrivant le lendemain
 int filtreTrajets1(int n, Trajet* lTrajet, Trajet* lTrajet_filtre, char ville[50], Date dateDepart){

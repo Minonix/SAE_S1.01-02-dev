@@ -1,6 +1,18 @@
 CC = gcc
+
+# Options de compilation
+# -Wall -Wextra -Werror: Affiche tous les avertissements utiles
+# -g3 : Ajoute les informations de débogage
+# -IHeaders : Spécifie que les fichiers d'en-tête (.h) se trouvent dans le dossier Headers
 CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders
-LDFLAGS = -Wl,-z,stack-size=16777210
+
+#pour windows :
+LDFLAGS = -Wl,--stack=167772160
+#pour Linux
+# LDFLAGS = -Wl,-z,stack-size=16777216
+
+
+# Nom de l'exécutable final
 EXEC = main.exe
 OBJDIR = obj
 SRCS = $(wildcard Sources/*.c)
@@ -10,7 +22,7 @@ all: $(EXEC)
 
 # Ici on utilise LDFLAGS pour l'édition de liens
 $(EXEC): $(OBJS)
-	$(CC) $(OBJS) $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 # Ici on utilise UNIQUEMENT CFLAGS pour compiler
 $(OBJDIR)/%.o: Sources/%.c | $(OBJDIR)

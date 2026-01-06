@@ -2,7 +2,6 @@
 #define FONCTIONS_H_INCLUDED
 
 
-
 typedef struct {
     int id;
     char nom[50];
@@ -62,17 +61,19 @@ void afficherhoraire(char* horaire);
 
 
 
+void afficherTrajet(Trajet lTrajet);
+
 /* 1
 Parametres : int nb , lTrajet un tableau de nb éléments contennant des struct Trajet
 Pré-condition : aucune
 Post-condition : L’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et d’arrivée)
 */
-void afficherTrajet(int nb, Trajet lTrajet[nb]);
+void afficherNTrajet(int nb, Trajet lTrajet[nb]);
 
 
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
-void afficheInfoTrajet(Trajet trajet, int numbus);
+void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus);
 
 
 /* 3
@@ -93,7 +94,7 @@ void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n]);
 
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
-void ajoutSupprClients(Trajet trajet, int numbus);
+void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_not);
 
 /* 5
 Parametres : int nb ; lTrajet, un pointeur vers un tableau contennant nb élément de type Trajet ; int nBus le numéro d'un bus (de type Trajet);
@@ -105,7 +106,7 @@ Post-condition : à partir d'un numéro d’un bus et du numéro (id) d’un cli
 void modificationClients(int nb, Trajet* lTrajet, int numbus, Passager client);
 
 // 6. la sauvegarde des données dans un fichier (mise à jour du fichier ou création d’un nouveau fichier)
-void sauvegardeDonnees(Trajet trajet);
+void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name);
 
 // 7. un filtre sur les trajets partant d’une ville, partant à une date, arrivant le lendemain
 int filtreTrajets1(int n, Trajet* lTrajet, Trajet* lTrajet_filtre,char ville[50], Date dateDepart);
