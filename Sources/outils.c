@@ -1,5 +1,6 @@
 #include "../Headers/fonctions.h"
 #include <stdio.h>
+
 void copie_str(char *c1, char *c2)
 {
     int i = 0;
@@ -29,7 +30,6 @@ void upper(char* ch){
             ch[i] = ch[i] - ('a' - 'A' );
         }
     }
-
 }
 
 int compare_date(Date d1, Date d2)
@@ -77,7 +77,7 @@ void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n])
 
 void afficherTrajet(Trajet lTrajet)
 {
-    printf("Voici la liste de tout les trajets : \n");
+    // printf("Voici la liste de tout les trajets : \n");
     printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ", lTrajet.villeDepart, lTrajet.villeArrivee,
            lTrajet.dateDepart.jour, lTrajet.dateDepart.mois, lTrajet.dateDepart.annee);
     if (lTrajet.horaireDepart[0] != 0)

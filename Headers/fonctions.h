@@ -65,7 +65,17 @@ void modificationClients(int nb, Trajet *lTrajet, int numbus, Passager client);
 // 6. la sauvegarde des données dans un fichier (mise à jour du fichier ou création d’un nouveau fichier)
 void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name);
 
-// 7. un filtre sur les trajets partant d’une ville, partant à une date, arrivant le lendemain
+/* 7
+Parametres : int n;
+             Trajet *lTrajet, un pointeur vers le tableau contenant les n trajets à analyser ;
+             Trajet *lTrajet_filtre, un pointeur vers le tableau de destination pour les résultats ;
+             char ville[50], la ville de départ recherchée ;
+             Date dateDepart, la date de départ recherchée.
+Sortie : int j, le nombre de trajets ayant validé les critères et ayant été copiés dans lTrajet_filtre.
+Pré-condition : n >= 0 ; lTrajet_filtre doit être de la même taille que lTrajet.
+Post-condition : remplit lTrajet_filtre avec les trajets de lTrajet qui partent de la ville donnée à la date
+                 indiquée, et qui arrive le lendemain.
+*/
 int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50], Date dateDepart);
 
 // 8. un filtre sur les trajets combinant ville de départ, ville d’arrivée et date de départ
