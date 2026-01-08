@@ -10,6 +10,7 @@ Post_condition : Copie la chaine c2 dans la chaine c1
 */
 void copie_str(char *c1, char *c2);
 
+
 int str_cmp(char *ch1, char *ch2);
 
 double calcule_ca(Trajet trajet);

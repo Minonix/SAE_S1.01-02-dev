@@ -2,14 +2,26 @@
 #include "../Headers/outils.h"
 #include <stdio.h>
 
+
+long long complexite ;
+
 // 1
 void afficherNTrajet(int nb, Trajet lTrajet[nb])
 {
+
+    complexite = 0;
+
     printf("Voici la liste de tout les trajets : \n");
+
+    complexite += 1 ;
     for (int i = 0; i < nb; i++)
     { // Parcours de tout les trajets.
+        complexite += 2 ;
+
+        complexite += 2 ;
         if (lTrajet[i].numbus != 0)
         {
+            complexite += 7 ;
             printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ", lTrajet[i].villeDepart, lTrajet[i].villeArrivee,
                    lTrajet[i].dateDepart.jour, lTrajet[i].dateDepart.mois, lTrajet[i].dateDepart.annee);
             printf("Horaire de départ : ");
@@ -21,35 +33,57 @@ void afficherNTrajet(int nb, Trajet lTrajet[nb])
             printf("\n");
         }
     }
+    complexite += 2 ;
 }
 
 // 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
 // d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
 void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus)
 {
+    complexite = 0 ;
+
+    complexite += 1 ;
     for (int i = 0; i < nb; i++)
     {
+        complexite += 2 ;
+
+        complexite += 2 ;
         if (trajet[i].numbus == numbus)
         {
             afficherTrajet(trajet[i]);
             return;
         }
     }
+    complexite += 2 ;
     printf("aucun trajet n'a été trouver\n");
 }
 
 // 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb])
 {
+    complexite = 0 ;
+
+    complexite += 1 ;
     int T[nb];
-    for (int i = 0; i < nb; i++)
+
+    complexite += 1 ;
+    for (int i = 0; i < nb; i++){
+        complexite += 4 ;
         T[i] = i;
+    }
+    complexite += 2 ;
 
     tri_selection_indirect(nb, lTrajet, T);
+
+    complexite += 1 ;
     for (int i = 0; i < nb; i++)
     {
+        complexite += 2 ;
+
+        complexite += 2 ;
         if (lTrajet[i].numbus != 0)
         {
+            complexite += 14 ;
             printf("NumBus : %d | Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ", lTrajet[T[i]].numbus,
                    lTrajet[T[i]].villeDepart, lTrajet[T[i]].villeArrivee,
                    lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee);
@@ -61,6 +95,7 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb])
             printf("\n");
         }
     }
+    complexite += 2 ;
 }
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
