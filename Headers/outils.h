@@ -44,6 +44,6 @@ void tri_selection_indirect_ca(int n, int T[], double tCa[]);
 //TODO: liste des fonction a faire pour le 10
 int retrait(Trajet trajet, Trajet wait[], int nb_pass);
 
-reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb);
+// reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb);
 
 #endif // OUTILS_H_INCLUDED
