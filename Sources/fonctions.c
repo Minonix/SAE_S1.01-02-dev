@@ -177,13 +177,18 @@ void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name)
 int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50], Date dateDepart)
 {
     int j = 0;
+    char villetmp[50];
+
     for (int i = 0; i < n; i++)
     {
+        copie_str(villetmp, lTrajet[i].villeDepart);
+        upper(villetmp);
+        upper(ville);
         if (compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
         {
             if (str_cmp(lTrajet[i].horaireArrivee, lTrajet[i].horaireDepart) <= 0)
             {
-                if (str_cmp(lTrajet[i].villeDepart, ville) == 0)
+                if (str_cmp(villetmp, ville) == 0)
                 {
                     lTrajet_filtre[j] = lTrajet[i];
                     j++;
@@ -200,8 +205,8 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
     int j = 0;
     for (int i = 0; i < n; i++)
     {
-        if (str_cmp(lTrajet[i].horaireArrivee, villeArrivee) == 0 
-        && str_cmp(lTrajet[i].horaireArrivee, villeDepart) == 0 
+        if (str_cmp(lTrajet[i].horaireArrivee, villeArrivee) == 0
+        && str_cmp(lTrajet[i].horaireArrivee, villeDepart) == 0
         && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
         {
             lTrajet_filtre[j] = lTrajet[i];
@@ -254,19 +259,20 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet)
 // 10. la possibilité de supprimer tous les bus avec un chiffre d’affaires négatif, en répartissant les passagers
 // sur les trajets identiques, en priorisant les passagers ayant payé le plus sur les dates et horaires les plus
 // proches du trajet initial. Il faudra indiquer le gain généré par cette opération
-void supprBusCANegatif(int nb, Trajet ltrajet[nb], int numbus) {
-    int dec = 0, nb_pass = 0;
-    double ca;
-    Trajet wait[nb];
-    for (int i = 0; i + dec < nb; i++) {
 
-        while ((ca = calcule_ca(ltrajet[i])) < 0) {
-            wait[dec] = ltrajet[i];
-            nb_pass++;
-            dec++;
-        ltrajet[i] = ltrajet[i+dec];
-    }
-    }
-    nb -= dec;
-    reatribution(wait, ltrajet, nb, nb_pass);
-}
+// void supprBusCANegatif(int nb, Trajet ltrajet[nb], int numbus) {
+//     int dec = 0, nb_pass = 0;
+//     double ca;
+//     Trajet wait[nb];
+//     for (int i = 0; i + dec < nb; i++) {
+
+//         while ((ca = calcule_ca(ltrajet[i])) < 0) {
+//             wait[dec] = ltrajet[i];
+//             nb_pass++;
+//             dec++;
+//         ltrajet[i] = ltrajet[i+dec];
+//     }
+//     }
+//     nb -= dec;
+//     reatribution(wait, ltrajet, nb, nb_pass);
+// }

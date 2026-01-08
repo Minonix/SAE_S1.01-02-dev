@@ -14,6 +14,8 @@ int str_cmp(char *ch1, char *ch2);
 
 double calcule_ca(Trajet trajet);
 
+void upper(char* ch);
+
 /**
  * entrées d1, d2: Date
  * sortie : int

@@ -23,6 +23,15 @@ int str_cmp(char *ch1, char *ch2)
     return ch1[i] - ch2[i];
 }
 
+void upper(char* ch){
+    for (int i=0; ch[i]!=0; i++){
+        if (ch[i]>='a' && ch[i]<='z'){
+            ch[i] = ch[i] - ('a' - 'A' );
+        }
+    }
+
+}
+
 int compare_date(Date d1, Date d2)
 {
     if (d1.annee == d2.annee && d1.mois == d2.mois && d1.jour == d2.jour)
