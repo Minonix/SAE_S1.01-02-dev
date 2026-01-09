@@ -104,28 +104,45 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb])
  */
 void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_not)
 {
+    complexite = 0 ;
+
     int a = 0;
+    complexite += 2 ;
+
     for (int i = 0; i < nb; i++)
     {
+        complexite += 2 ;
+
+        complexite += 2 ;
         if (trajet[i].numbus == numbus)
         { // une fois le bon trajet trouver
+            complexite += 1 ;
             for (int y = 0; y < trajet[i].nb_passager; y++)
             { // on parcours tout les passager
-                if (str_cmp(trajet[i].listePassagers[y].nom, new_or_not.nom) == 0)
+                complexite += 3 ;
+
+                complexite += 3 ;
+                if (str_cmp(trajet[i].listePassagers[y].nom, new_or_not.nom) == 0){
                     a = 1; // si le nom du passager est le meme
+                    complexite += 1 ;
+                }
                 if (a)
                 {
+                    complexite += 9 ;
                     trajet[i].listePassagers[y] = trajet[i].listePassagers[y + 1]; // si un passager a été trouver alors on le remplace par le prochian passager
                     trajet[i].listePassagers[y].id -= 1;
                 }
             }
+            complexite += 2 ;
             if (a)
             {
+                complexite += 2 ;
                 trajet[i].nb_passager--;
                 printf("passager retirer");
             }
             else
             {
+                complexite += 8 ;
                 trajet[i].nb_passager += 1;
                 new_or_not.id = trajet[i].nb_passager; // on ajuste l'id comme étant le derner id
                 trajet[i].listePassagers[trajet[i].nb_passager - 1] = new_or_not;
@@ -140,36 +157,56 @@ void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_no
 // 5
 void modificationClients(int nb, Trajet *lTrajet, int nBus, Passager client)
 {
+    complexite = 0 ;
+
     int trouve = 0; // si un client est trouvé pour un trajet donné.
+    complexite += 2 ;
     for (int i = 0; i < nb && !trouve; i++)
     { // On cherche le bus ayant pour numéro bus nBus // debut for1
+        complexite += 4 ;
+        complexite += 2 ;
         if (lTrajet[i].numbus == nBus)
         { // On le trouve
             int j;
+            complexite += 1 ;
             for (j = 0; j < 56 && lTrajet[i].listePassagers[j].nom[0] != 0 && !trouve; j++)
             { // On cherche le passager // debut for2
+                complexite += 9 ;
+
+                complexite += 3 ;
                 if (lTrajet[i].listePassagers[j].id == client.id)
-                {                                                                // On le trouve
+                {
+                    complexite += 6 ;
+                    // On le trouve
                     copie_str(lTrajet[i].listePassagers[j].nom, client.nom);     // On change son nom par le nouveau nom qui peut être identifique au premier
                     lTrajet[i].listePassagers[j].prixbillet = client.prixbillet; // On change le prix de son billet
                     trouve = 1;
                 } // On a fait ce que l'on voulait faire, le peut se terminer.
             } // fin for2
+            complexite += 8 ;
+
+            complexite += 1 ;
             if (!trouve)
             {
+                complexite += 1 ;
                 if (j > 55)
                 {
+                    complexite += 1 ;
                     printf("Le bus %d est complet.\n", lTrajet[i].numbus);
                 }
                 else
                 {
+                    complexite += 3 ;
                     lTrajet[i].listePassagers[j] = client;
                 }
+                complexite += 1 ;
                 trouve = 1;
             } // fin if
 
         } // fin if
     } // fin for1
+    complexite += 3 ;
+    complexite += 1 ;
     if (!trouve)
         printf("Le bus %d n'existe pas\n", nBus);
 }
