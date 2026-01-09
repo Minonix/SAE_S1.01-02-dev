@@ -3,7 +3,7 @@
 
 #include "fonctions.h"
 
-/*
+/*Milo
 Parametres : c1, c2 deux pointeurs vers une chaine de caractere.
 Pre-condition : c1 doit être de la même taille ou plus grande que c2
 Post_condition : Copie la chaine c2 dans la chaine c1
@@ -11,7 +11,7 @@ Post_condition : Copie la chaine c2 dans la chaine c1
 void copie_str(char *c1, char *c2);
 
 
-/*
+/*Milo
 Parametres : char *ch1, pointeur vers la première chaîne de caractères ;
              char *ch2, pointeur vers la deuxième chaîne de caractères.
 Sortie : int, retourne 0 si les chaînes sont identiques, 1 si ch1 est supérieure à ch2,
@@ -21,7 +21,7 @@ Post-condition : compare les deux chaînes selon l'ordre ASCII caractère par ca
 */
 int str_cmp(char *ch1, char *ch2);
 
-/*
+/*Milo
 Parametres : Trajet trajet, une structure de type Trajet.
 Sortie : double, retourne le bénéfice net du trajet (total des billets vendus moins le coût d'exploitation du bus) ou -99999.99 si les horaires sont invalides.
 Pré-condition : aucune.
@@ -31,7 +31,7 @@ Post-condition : extrait les horaires de départ et d'arrivée pour calculer la 
 */
 double calcule_ca(Trajet trajet);
 
-/*
+/*Milo
 Parametres : char *ch, un pointeur vers la chaîne de caractères à transformer.
 Sortie : aucune .
 Pré-condition : ch doit être une chaîne de caractères valide se terminant par le caractère nul '\0'.
@@ -40,14 +40,14 @@ Post-condition : parcourt la chaîne et remplace chaque lettre minuscule par sa
 */
 void upper(char* ch);
 
-/*
+/*Milo
  * entrées d1, d2: Date
  * sortie : int
  * post-cond: return 1 si d1 < d2. Si d1> d2, return  0. Si d1=d2 return 2.
  */
 int compare_date(Date d1, Date d2);
 
-/*
+/*Milo
 entrées : char* horaire
 pré-condition : un horaire est un tableau de forme hhmm, contennant 4 caracteres + le caractere \n de fin, horaire peut être vide.
 post-condition : affiche l'horaire sous la forme hh:mm
@@ -62,7 +62,7 @@ Post-condition : affiche les informations d'un trajet sur une seule ligne.
 */
 void afficherTrajet(Trajet lTrajet);
 
-/* 3
+/* Milo
 Parametres: int n, lTrajet un tableau de n éléments contennant des struct Trajet
 Parametres entrée/sortie : int T[n]
 Pré-condition : n > 0
@@ -70,7 +70,7 @@ Post-condition, trie selection indirect du tableau ltrajet avec T comme tableau 
 */
 void tri_selection_indirect(int n, Trajet lTrajet[], int T[]);
 
-/*
+/*Milo
 Parametres : int n, le nombre d'éléments à trier ;
              int T[n], un tableau d'entiers (index) ;
              double tCa[n], le tableau de référence contenant les chiffres d'affaires tCa[i] correspond au chiffre d'affaire du Trajet T[i].
