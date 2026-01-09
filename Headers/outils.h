@@ -40,7 +40,7 @@ Post-condition : parcourt la chaîne et remplace chaque lettre minuscule par sa
 */
 void upper(char* ch);
 
-/*
+/**
  * entrées d1, d2: Date
  * sortie : int
  * post-cond: return 1 si d1 < d2. Si d1> d2, return  0. Si d1=d2 return 2.

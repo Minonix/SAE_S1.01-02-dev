@@ -205,7 +205,20 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
     int j = 0;
     for (int i = 0; i < n; i++)
     {
-        if (str_cmp(lTrajet[i].horaireArrivee, villeArrivee) == 0 && str_cmp(lTrajet[i].horaireArrivee, villeDepart) == 0 && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
+        char lVilleArriver_tmp[50];
+        char lVilleDepart_tmp[50];
+        char villeArrivee_tmp[50];
+        char villeDepart_tmp[50];
+
+        copie_str(lVilleArriver_tmp, lTrajet[i].villeArrivee);
+        copie_str(lVilleDepart_tmp, lTrajet[i].villeDepart);
+        copie_str(villeArrivee_tmp, villeArrivee);
+        copie_str(villeDepart_tmp, villeDepart);
+        upper(lVilleArriver_tmp);
+        upper(lVilleDepart_tmp);
+        upper(villeArrivee_tmp);
+        upper(villeDepart_tmp);
+        if (str_cmp(lVilleArriver_tmp, villeArrivee_tmp) == 0 && str_cmp(lVilleDepart_tmp, villeDepart_tmp) == 0 && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
         {
             lTrajet_filtre[j] = lTrajet[i];
             j++;
@@ -262,7 +275,8 @@ void supprBusCANegatif(int nb, Trajet ltrajet[nb])
     int dec = 0, nb_pass = 0;
     double ca;
     Trajet wait[nb];
-    (void)wait;
+    printf("Trajets avec CA négatif à traiter :\n");
+      
     for (int i = 0; i + dec < nb; i++)
     {
 
@@ -276,5 +290,8 @@ void supprBusCANegatif(int nb, Trajet ltrajet[nb])
         }
     }
     nb -= dec;
+    for (int i = 0; i < dec; i++) {
+        afficherTrajet(wait[i]);
+    }
     // reatribution(wait, ltrajet, nb, nb_pass);
 }

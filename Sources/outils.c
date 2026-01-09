@@ -126,7 +126,7 @@ double calcule_ca(Trajet trajet)
     cout_bus += ((tArrivee - tDepart + 59) / 60) * 50;
 
     int i = 0;
-    while (trajet.listePassagers[i].id <= 55 && trajet.listePassagers[i].id >= 0)
+    while (i < trajet.nb_passager)
     {
         somme_billet += trajet.listePassagers[i].prixbillet;
         i++;
@@ -152,4 +152,3 @@ void tri_selection_indirect_ca(int n, int T[n], double tCa[n])
         T[j_mini] = temp;
     }
 }
-
