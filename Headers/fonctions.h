@@ -83,6 +83,13 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
 
 // 9. l’affichage des trajets triés par chiffre d’affaires (différence entre les prix des billets payés par les
 // passagers et le coût du trajet supporté par l’entreprise), avec affichage de ce chiffre d’affaires
+/* 9
+Parametres : int nb, le nombre de trajets dans le tableau ;
+             Trajet *lTrajet, un pointeur vers le tableau contenant les données des trajets.
+Pré-condition : nb >= 0 ; les fonctions calcule_ca, tri_selection_indirect_ca et afficherhoraire doivent être définies.
+Post-condition :Affichage des trajets triés par chiffre d’affaires (différence entre les prix des billets payés par les
+                passagers et le coût du trajet supporté par l’entreprise), avec affichage de ce chiffre d’affaires.
+*/
 void affichageTrajetTriesCA(int nb, Trajet *lTrajet);
 
 
