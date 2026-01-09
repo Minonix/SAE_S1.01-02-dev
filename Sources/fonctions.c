@@ -214,11 +214,20 @@ void modificationClients(int nb, Trajet *lTrajet, int nBus, Passager client)
 // 6. la sauvegarde des données dans un fichier (mise à jour du fichier ou création d’un nouveau fichier)
 void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name)
 {
+    complexite = 0;
     FILE *f = fopen(name, "w");
+
+    complexite += 1;
     if (!f)
         return;
+
+    complexite += 1;
     for (int i = 0; i < nb; i++)
     {
+        complexite += 2;
+
+
+        complexite += 8;
         fprintf(f, "%d,%s,%s,%02d/%02d/%02d,%s,%s,",
                 trajet[i].numbus,
                 trajet[i].villeDepart,
@@ -228,19 +237,24 @@ void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name)
                 trajet[i].dateDepart.annee,
                 trajet[i].horaireDepart,
                 trajet[i].horaireArrivee);
+        complexite += 1;
         for (int p = 0; p < trajet[i].nb_passager; p++)
         {
+            complexite += 3;
             fprintf(f, "%d:%s:%.2f",
                     trajet[i].listePassagers[p].id,
                     trajet[i].listePassagers[p].nom,
                     trajet[i].listePassagers[p].prixbillet);
+            complexite += 9;
             if (p < trajet[i].nb_passager - 1)
             {
                 fprintf(f, ",");
             }
         }
+        complexite += 2;
         fprintf(f, "\n");
     }
+    complexite += 1;
     printf("sauvgarde effectuer \n");
     fclose(f);
 }
@@ -248,38 +262,56 @@ void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name)
 // 7. un filtre sur les trajets partant d’une ville, partant à une date, arrivant le lendemain
 int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50], Date dateDepart)
 {
+    complexite = 0;
+
     int j = 0;
+    complexite += 1;
     for (int i = 0; i < n; i++)
     {
+        complexite += 2;
+
+        complexite += 2;
         if (compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
         {
+            complexite += 3;
             if (str_cmp(lTrajet[i].horaireArrivee, lTrajet[i].horaireDepart) <= 0)
             {
+                complexite += 2;
                 if (str_cmp(lTrajet[i].villeDepart, ville) == 0)
                 {
+                    complexite += 4;
                     lTrajet_filtre[j] = lTrajet[i];
                     j++;
                 }
             }
         }
     }
+    complexite += 1;
     return j;
 }
 
 // 8. un filtre sur les trajets combinant ville de départ, ville d’arrivée et date de départ
 int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDepart[50], char villeArrivee[50], Date dateDepart)
 {
+    complexite = 0;
+
     int j = 0;
+    complexite += 2;
     for (int i = 0; i < n; i++)
     {
+        complexite += 2;
+
+        complexite += 8;
         if (str_cmp(lTrajet[i].horaireArrivee, villeArrivee) == 0
         && str_cmp(lTrajet[i].horaireArrivee, villeDepart) == 0
         && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
         {
+            complexite += 4;
             lTrajet_filtre[j] = lTrajet[i];
             j++;
         }
     }
+    complexite += 1;
     return j;
 }
 
@@ -287,19 +319,31 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
 // passagers et le coût du trajet supporté par l’entreprise), avec affichage de ce chiffre d’affaires
 void affichageTrajetTriesCA(int nb, Trajet *lTrajet)
 {
+    complexite += 0;
+
+    complexite += 2;
     int T[nb];
     double tCa[nb];
+
+    complexite += 1;
     for (int i = 0; i < nb; i++)
     {
+        complexite += 2;
+        complexite += 5;
         T[i] = i;
         tCa[i] = calcule_ca(lTrajet[i]);
     }
+    complexite += 1;
 
     tri_selection_indirect_ca(nb, T, tCa);
+    complexite += 1;
     for (int i = 0; i < nb; i++)
     {
+        complexite += 2;
+        complexite += 3;
         if (lTrajet[T[i]].numbus != 0)
         {
+            complexite += 12;
             printf("NumBus : %d | Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ", lTrajet[T[i]].numbus,
                    lTrajet[T[i]].villeDepart, lTrajet[T[i]].villeArrivee,
                    lTrajet[T[i]].dateDepart.jour, lTrajet[T[i]].dateDepart.mois, lTrajet[T[i]].dateDepart.annee);
@@ -310,15 +354,19 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet)
             afficherhoraire(lTrajet[T[i]].horaireArrivee);
             printf(" | ");
             printf("Chiffre d'affaire : ");
+            complexite += 7;
             if (tCa[T[i]] == -99999.99)
             {
                 printf("CA INCONNU");
             }
-            else
+            else{
+                complexite += 2;
                 printf("%8.2lf", tCa[T[i]]);
+            }
             printf("\n");
         }
     }
+    complexite += 1;
 }
 
 

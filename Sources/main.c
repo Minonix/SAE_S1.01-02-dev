@@ -9,6 +9,8 @@ void parsec(char *chemin, int nb, Trajet fichier[nb]);
 char *extraire_token(char *src, char *dest, char separateur);
 void parsec_date(char *date, Trajet *trajet);
 
+extern long long complexite ;
+
 // --- MAIN ---
 int main(void)
 {
@@ -22,7 +24,7 @@ int main(void)
     }
 
     Trajet fichier[nb_l];
-    
+
     // DEBUT MAIN
     parsec(chemin, nb_l, fichier);
     int choix = 1;
@@ -67,7 +69,7 @@ int main(void)
             printf("Entrez le nom du passager (pour ajouter ou supprimer) : ");
             scanf("%s", p_new_or_not.nom);
             // L'ID et le prix du billet ne sont pas pertinents pour l'ajout/suppression par nom
-            p_new_or_not.id = 0; 
+            p_new_or_not.id = 0;
             p_new_or_not.prixbillet = 0.0;
             ajoutSupprClients(nb_l, fichier, numbus_mod, p_new_or_not);
         }

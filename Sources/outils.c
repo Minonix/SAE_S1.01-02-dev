@@ -1,7 +1,7 @@
 #include "../Headers/fonctions.h"
 #include <stdio.h>
 
-long long complexite ;
+extern long long complexite;
 
 void copie_str(char *c1, char *c2)
 {
