@@ -10,10 +10,14 @@ char *extraire_token(char *src, char *dest, char separateur);
 void parsec_date(char *date, Trajet *trajet);
 
 // --- MAIN ---
-int main(int nbarg, char* argv[])
+int main(int argc, char *argv[])
 {
-    (void)nbarg;
-    char chemin[50] ;
+    if (argc != 2)
+    {
+        printf("ERROR : nombre d'arguments incoerrant");
+        return (1);
+    }
+    char chemin[50];
     copie_str(chemin, argv[1]);
     int nb_l = count_lines(chemin);
 
@@ -113,7 +117,8 @@ int main(int nbarg, char* argv[])
 
             nb_filtres = filtreTrajets1(nb_l, fichier, trajets_filtres, ville_filtre, date_filtre);
             printf("Trajets filtrés (partant de %s, le %02d/%02d/%04d, arrivant le lendemain) :\n", ville_filtre, date_filtre.jour, date_filtre.mois, date_filtre.annee);
-            for (int i = 0; i < nb_filtres; i++) {
+            for (int i = 0; i < nb_filtres; i++)
+            {
                 afficherTrajet(trajets_filtres[i]);
             }
         }
@@ -138,7 +143,8 @@ int main(int nbarg, char* argv[])
 
             nb_filtres = filtreTrajets2(nb_l, fichier, trajets_filtres, ville_depart_filtre, ville_arrivee_filtre, date_filtre);
             printf("Trajets filtrés (départ %s, arrivée %s, le %02d/%02d/%04d) :\n", ville_depart_filtre, ville_arrivee_filtre, date_filtre.jour, date_filtre.mois, date_filtre.annee);
-            for (int i = 0; i < nb_filtres; i++) {
+            for (int i = 0; i < nb_filtres; i++)
+            {
                 afficherTrajet(trajets_filtres[i]);
             }
         }
@@ -148,20 +154,19 @@ int main(int nbarg, char* argv[])
         }
         else if (choix == 10)
         {
-            // supprBusCANegatif(fichier, nb_l); // Cette fonction nécessite une implémentation plus complexe
+            supprBusCANegatif(nb_l, fichier); // Cette fonction nécessite une implémentation plus complexe
+        }
+        else if (choix != 0){
+            printf("Argument non attendus.");
         }
 
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
 
-        int debug ;
-        while ((debug = getchar()) != '\n' && debug != EOF);
-
-        if (choix!=0){
-            choix = 0 ;
-            while (choix!=1){
-                printf("\n1 - Revenir aux choix : ");
-                scanf("%d",&choix);
-            }
-            choix=1;
+        if (choix != 0)
+        {
+            printf("\nAppuyez sur Entrée pour revenir au menu...");
+            while ((c = getchar()) != '\n' && c != EOF); 
         }
     }
 

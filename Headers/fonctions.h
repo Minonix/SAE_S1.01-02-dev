@@ -95,6 +95,6 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet);
 
 // 10. la possibilité de supprimer tous les bus avec un chiffre d’affaires négatif, en répartissant les passagers sur les trajets identiques,
 // en priorisant les passagers ayant payé le plus sur les dates et horaires les plus proches du trajet initial. Il faudra indiquer le gain généré par cette opération
-void supprBusCANegatif(Trajet trajet, int numbus);
+void supprBusCANegatif(int nb, Trajet ltrajet[nb]);
 
 #endif // FONCTIONS_H_INCLUDED

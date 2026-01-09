@@ -24,10 +24,13 @@ int str_cmp(char *ch1, char *ch2)
     return ch1[i] - ch2[i];
 }
 
-void upper(char* ch){
-    for (int i=0; ch[i]!=0; i++){
-        if (ch[i]>='a' && ch[i]<='z'){
-            ch[i] = ch[i] - ('a' - 'A' );
+void upper(char *ch)
+{
+    for (int i = 0; ch[i] != 0; i++)
+    {
+        if (ch[i] >= 'a' && ch[i] <= 'z')
+        {
+            ch[i] = ch[i] - ('a' - 'A');
         }
     }
 }
@@ -75,19 +78,28 @@ void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n])
     }
 }
 
+void afficherhoraire(char *horaire)
+{
+    if (horaire[0] == 0)
+        printf("ABSENT");
+    else
+    {
+        printf("%c%c:%c%c", horaire[0], horaire[1], horaire[2], horaire[3]);
+    }
+}
+
+
 void afficherTrajet(Trajet lTrajet)
 {
-    // printf("Voici la liste de tout les trajets : \n");
     printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ", lTrajet.villeDepart, lTrajet.villeArrivee,
            lTrajet.dateDepart.jour, lTrajet.dateDepart.mois, lTrajet.dateDepart.annee);
-    if (lTrajet.horaireDepart[0] != 0)
-        printf("Horaire de Départ : %6s | ", lTrajet.horaireDepart);
-    else
-        printf("Horaire de Départ : ABSENT | ");
-    if (lTrajet.horaireArrivee[0] != 0)
-        printf("Horaire d'arrivée : %6s\n", lTrajet.horaireArrivee);
-    else
-        printf("Horaire d'arrivée : ABSENT\n");
+    printf("Horaire de départ : ");
+    afficherhoraire(lTrajet.horaireDepart);
+    printf(" | ");
+    printf("Horaire d'arrivée : ");
+
+    afficherhoraire(lTrajet.horaireArrivee);
+    printf("\n");
 }
 
 double calcule_ca(Trajet trajet)
@@ -141,12 +153,3 @@ void tri_selection_indirect_ca(int n, int T[n], double tCa[n])
     }
 }
 
-void afficherhoraire(char *horaire)
-{
-    if (horaire[0] == 0)
-        printf("ABSENT");
-    else
-    {
-        printf(" %c%c:%c%c", horaire[0], horaire[1], horaire[2], horaire[3]);
-    }
-}
