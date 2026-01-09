@@ -205,7 +205,7 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
     int j = 0;
     for (int i = 0; i < n; i++)
     {
-        if (str_cmp(lTrajet[i].horaireArrivee, villeArrivee) == 0 && str_cmp(lTrajet[i].horaireArrivee, villeDepart) == 0 && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
+        if (str_cmp(lTrajet[i].villeArrivee, villeArrivee) == 0 && str_cmp(lTrajet[i].villeDepart, villeDepart) == 0 && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
         {
             lTrajet_filtre[j] = lTrajet[i];
             j++;
