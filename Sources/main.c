@@ -12,9 +12,11 @@ void parsec_date(char *date, Trajet *trajet);
 extern long long complexite ;
 
 // --- MAIN ---
-int main(void)
+int main(int nbarg, char* argv[])
 {
-    char chemin[50] = "test.csv";
+    (void)nbarg;
+    char chemin[50] ;
+    copie_str(chemin, argv[1]);
     int nb_l = count_lines(chemin);
 
     if (nb_l <= 0)
@@ -30,7 +32,9 @@ int main(void)
     int choix = 1;
     while (choix)
     {
-        printf("1 - Affichage des trajets\n");
+        complexite = 0;
+        system("clear");
+        printf("\n1 - Affichage des trajets\n");
         printf("2 - Affichage des informations sur un trajet particulier\n");
         printf("3 - Affichage des trajets triés par ville de départ et par date de départ\n");
         printf("4 - Ajout et suppression de clients à partir du numéro d’un bus\n");
@@ -148,6 +152,19 @@ int main(void)
         else if (choix == 10)
         {
             // supprBusCANegatif(fichier, nb_l); // Cette fonction nécessite une implémentation plus complexe
+        }
+
+        printf("%lld",complexite);
+        int debug ;
+        while ((debug = getchar()) != '\n' && debug != EOF);
+
+        if (choix!=0){
+            choix = 0 ;
+            while (choix!=1){
+                printf("\n1 - Revenir aux choix : ");
+                scanf("%d",&choix);
+            }
+            choix=1;
         }
     }
 
