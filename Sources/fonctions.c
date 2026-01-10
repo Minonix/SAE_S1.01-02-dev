@@ -276,7 +276,7 @@ void supprBusCANegatif(int nb, Trajet ltrajet[nb])
     double ca;
     Trajet wait[nb];
     printf("Trajets avec CA négatif à traiter :\n");
-      
+
     for (int i = 0; i + dec < nb; i++)
     {
 
