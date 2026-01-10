@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        printf("ERROR : nombre d'arguments incoerrant");
+        printf("ERROR : nombre d'arguments incohérant.\n");
         return (1);
     }
     char chemin[50];
@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
         if (choix != 0)
         {
             printf("\nAppuyez sur Entrée pour revenir au menu...");
-            while ((c = getchar()) != '\n' && c != EOF); 
+            while ((c = getchar()) != '\n' && c != EOF);
         }
     }
 

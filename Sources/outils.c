@@ -88,7 +88,7 @@ void afficherhoraire(char *horaire)
         printf("ABSENT");
     else
     {
-        printf("%c%c:%c%c", horaire[0], horaire[1], horaire[2], horaire[3]);
+        printf(" %c%c:%c%c", horaire[0], horaire[1], horaire[2], horaire[3]);
     }
 }
 
