@@ -156,6 +156,72 @@ int main(int argc, char *argv[])
         {
             supprBusCANegatif(nb_l, fichier); // Cette fonction nécessite une implémentation plus complexe
         }
+        else if (choix == 777) {
+            //zone de test
+            printf("--- Test de tri_selection_horaire ---\n");
+
+            // Création de trajets de test
+            Trajet testTrajets[5];
+            int nbTestTrajets = 5;
+
+            // Trajet de référence
+            Trajet refTrajet;
+            copie_str(refTrajet.villeDepart, "Paris");
+            copie_str(refTrajet.villeArrivee, "Lyon");
+            refTrajet.dateDepart.jour = 10;
+            refTrajet.dateDepart.mois = 5;
+            refTrajet.dateDepart.annee = 2024;
+            copie_str(refTrajet.horaireDepart, "12:00");
+
+            // Trajet 0: Identique à la référence, même date, même heure
+            copie_str(testTrajets[0].villeDepart, "Paris");
+            copie_str(testTrajets[0].villeArrivee, "Lyon");
+            testTrajets[0].dateDepart.jour = 10;
+            testTrajets[0].dateDepart.mois = 5;
+            testTrajets[0].dateDepart.annee = 2024;
+            copie_str(testTrajets[0].horaireDepart, "12:00");
+
+            // Trajet 1: Identique à la référence, même date, heure plus tard
+            copie_str(testTrajets[1].villeDepart, "Paris");
+            copie_str(testTrajets[1].villeArrivee, "Lyon");
+            testTrajets[1].dateDepart.jour = 10;
+            testTrajets[1].dateDepart.mois = 5;
+            testTrajets[1].dateDepart.annee = 2024;
+            copie_str(testTrajets[1].horaireDepart, "14:30");
+
+            // Trajet 2: Identique à la référence, date plus tard, heure plus tôt
+            copie_str(testTrajets[2].villeDepart, "Paris");
+            copie_str(testTrajets[2].villeArrivee, "Lyon");
+            testTrajets[2].dateDepart.jour = 11;
+            testTrajets[2].dateDepart.mois = 5;
+            testTrajets[2].dateDepart.annee = 2024;
+            copie_str(testTrajets[2].horaireDepart, "1000");
+
+            // Trajet 3: Identique à la référence, date plus tôt, heure plus tard
+            copie_str(testTrajets[3].villeDepart, "Paris");
+            copie_str(testTrajets[3].villeArrivee, "Lyon");
+            testTrajets[3].dateDepart.jour = 9;
+            testTrajets[3].dateDepart.mois = 5;
+            testTrajets[3].dateDepart.annee = 2024;
+            copie_str(testTrajets[3].horaireDepart, "1300");
+
+            // Trajet 4: Identique à la référence, même date, heure plus tôt
+            copie_str(testTrajets[4].villeDepart, "Paris");
+            copie_str(testTrajets[4].villeArrivee, "Lyon");
+            testTrajets[4].dateDepart.jour = 10;
+            testTrajets[4].dateDepart.mois = 5;
+            testTrajets[4].dateDepart.annee = 2024;
+            copie_str(testTrajets[4].horaireDepart, "1100");
+
+            int indices_identiques[5] = {0, 1, 2, 3, 4}; // Tous les trajets sont "identiques" pour ce test
+            tri_selection_horaire(nbTestTrajets, nbTestTrajets, testTrajets, indices_identiques, refTrajet);
+
+            printf("Ordre des trajets après tri (indices) :\n");
+            for (int i = 0; i < nbTestTrajets; i++) {
+                printf("Indice %d: ", indices_identiques[i]);
+                afficherTrajet(testTrajets[indices_identiques[i]]);
+            }
+        }
         else if (choix != 0){
             printf("Argument non attendus.");
         }

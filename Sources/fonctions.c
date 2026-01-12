@@ -275,28 +275,30 @@ void supprBusCANegatif(int nb, Trajet ltrajet[nb])
     int dec = 0, nb_pass = 0;
     double ca;
     Trajet wait[nb];
-    printf("Trajets avec CA négatif à traiter :\n");
-
+    
     for (int i = 0; i + dec < nb; i++)
-    {
-
-        while ((ca = calcule_ca(ltrajet[i])) < 0 && i + dec < nb)
+    { 
+        ca = calcule_ca(ltrajet[i]);
+        while (ca < 0 && i + dec < nb)
         {
             wait[dec] = ltrajet[i];
             nb_pass++;
             dec++;
             i++;
             ltrajet[i] = ltrajet[i + dec];
+            ca = calcule_ca(ltrajet[i]);
         }
     }
     nb -= dec;
+    printf("Trajets avec CA négatif à traiter :\n");
     for (int i = 0; i < dec; i++)
     {
         afficherTrajet(wait[i]);
-    //     for (int p = 0; p < wait[i].nb_passager; p++)
-    //     {
-    //         printf(" Passager %d: %s (ID: %d, Prix: %.2f)\n", p + 1, wait[i].listePassagers[p].nom, wait[i].listePassagers[p].id, wait[i].listePassagers[p].prixbillet);
-    //     }
+        for (int p = 0; p < wait[i].nb_passager; p++)
+        {
+            printf(" Passager %d: %s (ID: %d, Prix: %.2f)\n", p + 1, wait[i].listePassagers[p].nom, wait[i].listePassagers[p].id, wait[i].listePassagers[p].prixbillet);
+        }
     }
+
     reatribution(wait, ltrajet, nb_pass, nb);
 }

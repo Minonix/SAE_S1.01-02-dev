@@ -83,6 +83,9 @@ void tri_selection_indirect_ca(int n, int T[], double tCa[]);
 
 //TODO: liste des fonction a faire pour le 10
 
+void tri_selection_horaire(int nb, int n, Trajet ltrajet[nb], int s_trajet[n], Trajet trajetCible);
+
+
 void reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb);
 
 #endif // OUTILS_H_INCLUDED
