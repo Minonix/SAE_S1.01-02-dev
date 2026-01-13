@@ -81,8 +81,7 @@ int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50
 // 8. un filtre sur les trajets combinant ville de départ, ville d’arrivée et date de départ
 int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDepart[50], char villeArrivee[50], Date dateDepart);
 
-// 9. l’affichage des trajets triés par chiffre d’affaires (différence entre les prix des billets payés par les
-// passagers et le coût du trajet supporté par l’entreprise), avec affichage de ce chiffre d’affaires
+
 /* 9
 Parametres : int nb, le nombre de trajets dans le tableau ;
              Trajet *lTrajet, un pointeur vers le tableau contenant les données des trajets.
