@@ -184,7 +184,7 @@ int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50
         copie_str(villetmp, lTrajet[i].villeDepart);
         upper(villetmp);
         upper(ville);
-        if (compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
+        if (compare_date(lTrajet[i].dateDepart, dateDepart) == 0)
         {
             if (str_cmp(lTrajet[i].horaireArrivee, lTrajet[i].horaireDepart) <= 0)
             {
@@ -218,7 +218,7 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
         upper(lVilleDepart_tmp);
         upper(villeArrivee_tmp);
         upper(villeDepart_tmp);
-        if (str_cmp(lVilleArriver_tmp, villeArrivee_tmp) == 0 && str_cmp(lVilleDepart_tmp, villeDepart_tmp) == 0 && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
+        if (str_cmp(lVilleArriver_tmp, villeArrivee_tmp) == 0 && str_cmp(lVilleDepart_tmp, villeDepart_tmp) == 0 && compare_date(lTrajet[i].dateDepart, dateDepart) == 0)
         {
             lTrajet_filtre[j] = lTrajet[i];
             j++;
@@ -275,9 +275,9 @@ void supprBusCANegatif(int nb, Trajet ltrajet[nb])
     int dec = 0, nb_pass = 0;
     double ca;
     Trajet wait[nb];
-    
+
     for (int i = 0; i + dec < nb; i++)
-    { 
+    {
         ca = calcule_ca(ltrajet[i]);
         while (ca < 0 && i + dec < nb)
         {

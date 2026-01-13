@@ -43,7 +43,10 @@ void upper(char* ch);
 /**
  * entrées d1, d2: Date
  * sortie : int
- * post-cond: return 1 si d1 < d2. Si d1> d2, return  0. Si d1=d2 return 2.
+ * post-cond :
+ * retour > 0 si d1 < d2
+ * retour < 0 si d1 > d2
+ * retour = 0 si d1 = d2
  */
 int compare_date(Date d1, Date d2);
 
