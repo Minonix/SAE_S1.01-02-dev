@@ -205,7 +205,20 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
     int j = 0;
     for (int i = 0; i < n; i++)
     {
-        if (str_cmp(lTrajet[i].villeArrivee, villeArrivee) == 0 && str_cmp(lTrajet[i].villeDepart, villeDepart) == 0 && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
+        char lVilleArriver_tmp[50];
+        char lVilleDepart_tmp[50];
+        char villeArrivee_tmp[50];
+        char villeDepart_tmp[50];
+
+        copie_str(lVilleArriver_tmp, lTrajet[i].villeArrivee);
+        copie_str(lVilleDepart_tmp, lTrajet[i].villeDepart);
+        copie_str(villeArrivee_tmp, villeArrivee);
+        copie_str(villeDepart_tmp, villeDepart);
+        upper(lVilleArriver_tmp);
+        upper(lVilleDepart_tmp);
+        upper(villeArrivee_tmp);
+        upper(villeDepart_tmp);
+        if (str_cmp(lVilleArriver_tmp, villeArrivee_tmp) == 0 && str_cmp(lVilleDepart_tmp, villeDepart_tmp) == 0 && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
         {
             lTrajet_filtre[j] = lTrajet[i];
             j++;
@@ -262,19 +275,30 @@ void supprBusCANegatif(int nb, Trajet ltrajet[nb])
     int dec = 0, nb_pass = 0;
     double ca;
     Trajet wait[nb];
-    (void)wait;
+    
     for (int i = 0; i + dec < nb; i++)
-    {
-
-        while ((ca = calcule_ca(ltrajet[i])) < 0 && i + dec < nb)
+    { 
+        ca = calcule_ca(ltrajet[i]);
+        while (ca < 0 && i + dec < nb)
         {
             wait[dec] = ltrajet[i];
             nb_pass++;
             dec++;
             i++;
             ltrajet[i] = ltrajet[i + dec];
+            ca = calcule_ca(ltrajet[i]);
         }
     }
     nb -= dec;
-    // reatribution(wait, ltrajet, nb, nb_pass);
+    printf("Trajets avec CA négatif à traiter :\n");
+    for (int i = 0; i < dec; i++)
+    {
+        afficherTrajet(wait[i]);
+        for (int p = 0; p < wait[i].nb_passager; p++)
+        {
+            printf(" Passager %d: %s (ID: %d, Prix: %.2f)\n", p + 1, wait[i].listePassagers[p].nom, wait[i].listePassagers[p].id, wait[i].listePassagers[p].prixbillet);
+        }
+    }
+
+    reatribution(wait, ltrajet, nb_pass, nb);
 }

@@ -40,7 +40,7 @@ Post-condition : parcourt la chaîne et remplace chaque lettre minuscule par sa
 */
 void upper(char* ch);
 
-/*
+/**
  * entrées d1, d2: Date
  * sortie : int
  * post-cond: return 1 si d1 < d2. Si d1> d2, return  0. Si d1=d2 return 2.
@@ -82,8 +82,10 @@ Post-condition : effectue un tri par sélection sur le tableau d'index T en se b
 void tri_selection_indirect_ca(int n, int T[], double tCa[]);
 
 //TODO: liste des fonction a faire pour le 10
-int retrait(Trajet trajet, Trajet wait[], int nb_pass);
 
-// reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb);
+void tri_selection_horaire(int nb, int n, Trajet ltrajet[nb], int s_trajet[n], Trajet trajetCible);
+
+
+void reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb);
 
 #endif // OUTILS_H_INCLUDED

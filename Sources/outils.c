@@ -37,21 +37,10 @@ void upper(char *ch)
 
 int compare_date(Date d1, Date d2)
 {
-    if (d1.annee == d2.annee && d1.mois == d2.mois && d1.jour == d2.jour)
-    {
-        return 2;
-    }
-    if (d1.annee > d2.annee)
-        return 0;
-    else if (d1.annee < d2.annee)
-        return 1;
-    if (d1.mois > d2.mois)
-        return 0;
-    else if (d1.mois < d2.mois)
-        return 1;
-    if (d1.jour > d2.jour)
-        return 0;
-    return 1;
+    int td1 = d1.annee * 365 + d1.mois * 30 + d1.jour;
+    int td2 = d2.annee * 365 + d2.mois * 30 + d2.jour;
+
+    return (td2 - td1);
 }
 
 void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n])
@@ -84,10 +73,9 @@ void afficherhoraire(char *horaire)
         printf("ABSENT");
     else
     {
-        printf("%c%c:%c%c", horaire[0], horaire[1], horaire[2], horaire[3]);
+        printf(" %c%c:%c%c", horaire[0], horaire[1], horaire[2], horaire[3]);
     }
 }
-
 
 void afficherTrajet(Trajet lTrajet)
 {
@@ -126,7 +114,7 @@ double calcule_ca(Trajet trajet)
     cout_bus += ((tArrivee - tDepart + 59) / 60) * 50;
 
     int i = 0;
-    while (trajet.listePassagers[i].id <= 55 && trajet.listePassagers[i].id >= 0)
+    while (i < trajet.nb_passager)
     {
         somme_billet += trajet.listePassagers[i].prixbillet;
         i++;
@@ -153,3 +141,105 @@ void tri_selection_indirect_ca(int n, int T[n], double tCa[n])
     }
 }
 
+int compare_horaire(char *h1, char *h2)
+{
+    int hd1, md1, hd2, md2;
+    sscanf(h1, "%2d:%2d", &hd1, &md1);
+    sscanf(h2, "%2d:%2d", &hd2, &md2);
+    int t1 = hd1 * 60 + md1;
+    int t2 = hd2 * 60 + md2;
+    return t1 - t2;
+}
+
+void tri_selection_horaire(int nb, int n, Trajet ltrajet[nb], int s_trajet[n], Trajet trajetCible)
+{
+    int temp;
+    for (int i = 0; i < n - 1; i++)
+    {
+        int j_mini = i;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (compare_horaire(ltrajet[s_trajet[j]].horaireDepart, trajetCible.horaireDepart) < compare_horaire(ltrajet[s_trajet[j_mini]].horaireDepart, trajetCible.horaireDepart) 
+            && compare_date(ltrajet[s_trajet[j]].dateDepart, trajetCible.dateDepart) < compare_date(ltrajet[s_trajet[j_mini]].dateDepart, trajetCible.dateDepart))
+            {
+                j_mini = j;
+            }
+        }
+        temp = s_trajet[i];
+        s_trajet[i] = s_trajet[j_mini];
+        s_trajet[j_mini] = temp;
+    }
+}
+
+int filtrerTrajetsIdentiques(int nb, Trajet *lTrajet, int *indices_trajets_identiques, Trajet trajetRef)
+{
+    int x = 0;
+    for (int j = 0; j < nb; j++)
+    {
+        char lVilleArriver_tmp[50];
+        char lVilleDepart_tmp[50];
+        char villeArrivee_tmp[50];
+        char villeDepart_tmp[50];
+
+        copie_str(lVilleArriver_tmp, lTrajet[j].villeArrivee);
+        copie_str(lVilleDepart_tmp, lTrajet[j].villeDepart);
+        copie_str(villeArrivee_tmp, trajetRef.villeArrivee);
+        copie_str(villeDepart_tmp, trajetRef.villeDepart);
+        upper(lVilleArriver_tmp);
+        upper(lVilleDepart_tmp);
+        upper(villeArrivee_tmp);
+        upper(villeDepart_tmp);
+        if (str_cmp(lVilleArriver_tmp, villeArrivee_tmp) == 0 && str_cmp(lVilleDepart_tmp, villeDepart_tmp) == 0)
+        {
+            indices_trajets_identiques[x] = j;
+            x++;
+        }
+    }
+    return x;
+}
+
+void reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb)
+{
+    printf("-----------------------------------------\n");
+    for (int i = 0; i < nb_pass; i++)
+    {
+        // Tri des passagers de ce trajet par prix de billet décroissant
+        for (int j = 0; j < wait[i].nb_passager - 1; j++)
+        {
+            for (int k = j + 1; k < wait[i].nb_passager; k++)
+            {
+                if (wait[i].listePassagers[j].prixbillet < wait[i].listePassagers[k].prixbillet)
+                {
+                    Passager temp = wait[i].listePassagers[j];
+                    wait[i].listePassagers[j] = wait[i].listePassagers[k];
+                    wait[i].listePassagers[k] = temp;
+                }
+            }
+        }
+
+        // for (int p = 0; p < wait[i].nb_passager; p++)
+        // {
+        //     printf(" Passager %d: %s (ID: %d, Prix: %.2f) 2\n", p + 1, wait[i].listePassagers[p].nom, wait[i].listePassagers[p].id, wait[i].listePassagers[p].prixbillet);
+        // }
+        // printf("-----------------------------------------\n");
+
+        int indices_trajets_identiques[nb];
+        int nb_trajets_identiques = filtrerTrajetsIdentiques(nb, ltrajet, indices_trajets_identiques, wait[i]);
+
+        tri_selection_horaire(nb, nb_trajets_identiques, ltrajet, indices_trajets_identiques, wait[i]);
+
+
+
+        for (int p = 0; p < wait[i].nb_passager; p++)
+        {
+            Passager current_passager = wait[i].listePassagers[p];
+            int passager_attribue = 0;
+            
+            if (!passager_attribue)
+            {
+                printf("Le passager %s du bus %d n'a pas pu être réattribué.\n", current_passager.nom, wait[i].numbus);
+            }
+        }
+        // (void)passager_attribue;
+    }
+}
