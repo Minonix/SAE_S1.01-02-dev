@@ -29,71 +29,86 @@ typedef struct
 } Trajet;
 
 
-
-/* 1
-Parametres : int nb , lTrajet un tableau de nb éléments contennant des struct Trajet
-Pré-condition : aucune
-Post-condition : L’affichage de tous les trajets prévus (villes de départ et d’arrivée, dates et horaires de départ et d’arrivée)
-*/
+/**
+* entre : nb (nombre d'éléments), lTrajet (tableau de Trajet)
+* résultats : void
+* Pré-condition : nb >= 0
+* Post-condition : Affiche tous les trajets (villes, dates, horaires) sur la sortie standard
+**/
 void afficherNTrajet(int nb, Trajet lTrajet[nb]);
 
-// 2. à partir du numéro d’un bus, l’affichage de toutes les informations sur le trajet (villes de départ et
-// d’arrivée, dates et horaires de départ et d’arrivée, liste des clients)
+/**
+* entre : nb (nombre d'éléments), trajet (tableau de Trajet), numbus (numéro du bus recherché)
+* résultats : void
+* Pré-condition : nb >= 0
+* Post-condition : Affiche les détails complets du trajet correspondant au numéro de bus, ou un message d'erreur si non trouvé
+**/
 void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus);
 
-/* 3
-Parametres: int nb, lTrajet un tableau de nb éléments contennant des struct Trajet
-Pré-condition : Aucune
-Post-condition : L’affichage de tous les trajets triés par ville de départ et par date de départ
-*/
+/**
+* entre : nb (nombre d'éléments), lTrajet (tableau de Trajet)
+* résultats : void
+* Pré-condition : nb >= 0
+* Post-condition : Affiche les trajets triés par ville de départ puis par date de départ
+**/
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb]);
 
-
-
-// 4. à partir du numéro d’un bus, ajout et suppression de clients
+/**
+* entre : nb (nombre d'éléments), trajet (tableau de Trajet), numbus (numéro du bus), new_or_not (Passager à ajouter/supprimer)
+* résultats : void
+* Pré-condition : nb >= 0
+* Post-condition : Ajoute le passager s'il n'existe pas (et s'il reste de la place), ou le supprime s'il existe (basé sur le nom) dans le bus spécifié
+**/
 void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_not);
 
-/* 5
-Parametres : int nb ; lTrajet, un pointeur vers un tableau contennant nb élément de type Trajet ; int nBus le numéro d'un bus (de type Trajet);
-             Passager Client, un client possédant un id, un nom et un prix.
-Pré-condition : aucune
-Post-condition : à partir d'un numéro d’un bus et du numéro (id) d’un client, modifie ou ajoute le nom du client ou/et
-                 du prix de son billet
-*/
+/**
+* entre : nb (nombre d'éléments), lTrajet (pointeur vers tableau de Trajet), numbus (numéro du bus), client (Passager avec nouvelles infos)
+* résultats : void
+* Pré-condition : nb >= 0
+* Post-condition : Modifie le nom et le prix du passager (identifié par ID) dans le bus spécifié, ou l'ajoute si non trouvé
+**/
 void modificationClients(int nb, Trajet *lTrajet, int numbus, Passager client);
 
-// 6. la sauvegarde des données dans un fichier (mise à jour du fichier ou création d’un nouveau fichier)
+/**
+* entre : nb (nombre d'éléments), trajet (tableau de Trajet), name (nom du fichier de sauvegarde)
+* résultats : void
+* Pré-condition : name est un chemin valide accessible en écriture
+* Post-condition : Écrit l'ensemble des données des trajets et passagers dans le fichier spécifié au format CSV
+**/
 void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name);
 
-/* 7
-Parametres : int n;
-             Trajet *lTrajet, un pointeur vers le tableau contenant les n trajets à analyser ;
-             Trajet *lTrajet_filtre, un pointeur vers le tableau de destination pour les résultats ;
-             char ville[50], la ville de départ recherchée ;
-             Date dateDepart, la date de départ recherchée.
-Sortie : int j, le nombre de trajets ayant validé les critères et ayant été copiés dans lTrajet_filtre.
-Pré-condition : n >= 0 ; lTrajet_filtre doit être de la même taille que lTrajet.
-Post-condition : remplit lTrajet_filtre avec les trajets de lTrajet qui partent de la ville donnée à la date
-                 indiquée, et qui arrive le lendemain.
-*/
+/**
+* entre : n (nombre d'éléments), lTrajet (tableau source), lTrajet_filtre (tableau destination), ville (filtre ville départ), dateDepart (filtre date)
+* résultats : int (nombre de trajets trouvés)
+* Pré-condition : lTrajet_filtre doit être alloué avec une taille suffisante (>= n)
+* Post-condition : Remplit lTrajet_filtre avec les trajets partant de la ville donnée à la date donnée et arrivant le lendemain
+**/
 int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50], Date dateDepart);
 
-// 8. un filtre sur les trajets combinant ville de départ, ville d’arrivée et date de départ
+/**
+* entre : n (nombre d'éléments), lTrajet (tableau source), lTrajet_filtre (tableau destination), villeDepart, villeArrivee, dateDepart
+* résultats : int (nombre de trajets trouvés)
+* Pré-condition : lTrajet_filtre doit être alloué avec une taille suffisante (>= n)
+* Post-condition : Remplit lTrajet_filtre avec les trajets correspondant aux villes de départ/arrivée et à la date spécifiées
+**/
 int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDepart[50], char villeArrivee[50], Date dateDepart);
 
 
-/* 9
-Parametres : int nb, le nombre de trajets dans le tableau ;
-             Trajet *lTrajet, un pointeur vers le tableau contenant les données des trajets.
-Pré-condition : nb >= 0 ; les fonctions calcule_ca, tri_selection_indirect_ca et afficherhoraire doivent être définies.
-Post-condition :Affichage des trajets triés par chiffre d’affaires (différence entre les prix des billets payés par les
-                passagers et le coût du trajet supporté par l’entreprise), avec affichage de ce chiffre d’affaires.
-*/
+/**
+* entre : nb (nombre d'éléments), lTrajet (tableau de Trajet)
+* résultats : void
+* Pré-condition : nb >= 0
+* Post-condition : Affiche la liste des trajets triée par chiffre d'affaires croissant
+**/
 void affichageTrajetTriesCA(int nb, Trajet *lTrajet);
 
 
-// 10. la possibilité de supprimer tous les bus avec un chiffre d’affaires négatif, en répartissant les passagers sur les trajets identiques,
-// en priorisant les passagers ayant payé le plus sur les dates et horaires les plus proches du trajet initial. Il faudra indiquer le gain généré par cette opération
-void supprBusCANegatif(int nb, Trajet ltrajet[nb]);
+/**
+* entre : nb (nombre d'éléments), ltrajet (tableau de Trajet)
+* résultats : int (nouveau nombre de trajets)
+* Pré-condition : nb >= 0
+* Post-condition : Supprime les bus à CA négatif, réattribue leurs passagers sur d'autres bus compatibles, et retourne la nouvelle taille du tableau
+**/
+int supprBusCANegatif(int nb, Trajet ltrajet[nb]);
 
 #endif // FONCTIONS_H_INCLUDED

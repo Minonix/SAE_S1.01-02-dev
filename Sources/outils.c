@@ -200,7 +200,6 @@ int filtrerTrajetsIdentiques(int nb, Trajet *lTrajet, int *indices_trajets_ident
 
 void reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb)
 {
-    printf("-----------------------------------------\n");
     for (int i = 0; i < nb_pass; i++)
     {
         // Tri des passagers de ce trajet par prix de billet décroissant
@@ -217,29 +216,33 @@ void reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb)
             }
         }
 
-        // for (int p = 0; p < wait[i].nb_passager; p++)
-        // {
-        //     printf(" Passager %d: %s (ID: %d, Prix: %.2f) 2\n", p + 1, wait[i].listePassagers[p].nom, wait[i].listePassagers[p].id, wait[i].listePassagers[p].prixbillet);
-        // }
-        // printf("-----------------------------------------\n");
-
         int indices_trajets_identiques[nb];
         int nb_trajets_identiques = filtrerTrajetsIdentiques(nb, ltrajet, indices_trajets_identiques, wait[i]);
 
         tri_selection_horaire(nb, nb_trajets_identiques, ltrajet, indices_trajets_identiques, wait[i]);
-
-
 
         for (int p = 0; p < wait[i].nb_passager; p++)
         {
             Passager current_passager = wait[i].listePassagers[p];
             int passager_attribue = 0;
             
-            if (!passager_attribue)
+            for (int j = 0; j < nb_trajets_identiques && !passager_attribue; j++)
             {
-                printf("Le passager %s du bus %d n'a pas pu être réattribué.\n", current_passager.nom, wait[i].numbus);
+                int idx = indices_trajets_identiques[j];
+                if (ltrajet[idx].nb_passager < 55)
+                {
+                    int k = ltrajet[idx].nb_passager;
+                    ltrajet[idx].listePassagers[k] = current_passager;
+                    ltrajet[idx].listePassagers[k].id = k + 1;
+                    ltrajet[idx].nb_passager++;
+                    passager_attribue = 1;
+                }
+            }
+            if (passager_attribue)
+            {
+                printf("Le passager %s du bus %d a pu être réattribué.\n", current_passager.nom, wait[i].numbus);
             }
         }
-        // (void)passager_attribue;
     }
 }
+
