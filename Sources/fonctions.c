@@ -8,7 +8,7 @@ void afficherNTrajet(int nb, Trajet lTrajet[nb])
     printf("Voici la liste de tout les trajets : \n");
     for (int i = 0; i < nb; i++)
     { // Parcours de tout les trajets.
-        if (lTrajet[i].numbus != 0)
+        if (lTrajet[i].numbus != 0) //On affiche tout les trajets existants
         {
             printf("Ville de départ : %17s | Ville d'arrivée : %17s | Date de départ : %02d/%02d/%4d | ", lTrajet[i].villeDepart, lTrajet[i].villeArrivee,
                    lTrajet[i].dateDepart.jour, lTrajet[i].dateDepart.mois, lTrajet[i].dateDepart.annee);
@@ -42,11 +42,11 @@ void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus)
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb])
 {
     int T[nb];
-    for (int i = 0; i < nb; i++)
+    for (int i = 0; i < nb; i++) // Initialisation du tableau d'indice
         T[i] = i;
 
-    tri_selection_indirect(nb, lTrajet, T);
-    for (int i = 0; i < nb; i++)
+    tri_selection_indirect(nb, lTrajet, T); // On trie le tableau d'indice
+    for (int i = 0; i < nb; i++) // On affiche les informations des Trajets en fonction du tableau d'indice trié
     {
         if (lTrajet[i].numbus != 0)
         {
@@ -182,16 +182,16 @@ int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50
     for (int i = 0; i < n; i++)
     {
         copie_str(villetmp, lTrajet[i].villeDepart);
-        upper(villetmp);
+        upper(villetmp); // Pour ignorer la casse
         upper(ville);
-        if (compare_date(lTrajet[i].dateDepart, dateDepart) == 0)
+        if (compare_date(lTrajet[i].dateDepart, dateDepart) == 0) // On filtre les trajets sur leurs dates de départs
         {
-            if (str_cmp(lTrajet[i].horaireArrivee, lTrajet[i].horaireDepart) <= 0)
-            {
-                if (str_cmp(villetmp, ville) == 0)
+            if (str_cmp(lTrajet[i].horaireArrivee, lTrajet[i].horaireDepart) <= 0) // On les refiltres sur les horaires, il doit partir un jour et
+            {                                                                      // arriver le lendemain
+                if (str_cmp(villetmp, ville) == 0) //Les villes sont les mêmes sans prendre en compte la casse
                 {
-                    lTrajet_filtre[j] = lTrajet[i];
-                    j++;
+                    lTrajet_filtre[j] = lTrajet[i]; //On sélectionne le Trajet, donc on le met dans lTrajet_filtre
+                    j++;                            //La taille de lTrajet_filtre augmente
                 }
             }
         }
@@ -235,12 +235,12 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet)
     double tCa[nb];
     for (int i = 0; i < nb; i++)
     {
-        T[i] = i;
-        tCa[i] = calcule_ca(lTrajet[i]);
+        T[i] = i;                        // On initialise le tableau d'indice
+        tCa[i] = calcule_ca(lTrajet[i]); // On initialise le tableau de chiffre d'affaire
     }
 
-    tri_selection_indirect_ca(nb, T, tCa);
-    for (int i = 0; i < nb; i++)
+    tri_selection_indirect_ca(nb, T, tCa); // On tri le tableau d'indice en fonction du tableau de chiffre d'affaire
+    for (int i = 0; i < nb; i++) // Affichage du tableau trié
     {
         if (lTrajet[T[i]].numbus != 0)
         {
@@ -254,7 +254,7 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet)
             afficherhoraire(lTrajet[T[i]].horaireArrivee);
             printf(" | ");
             printf("Chiffre d'affaire : ");
-            if (tCa[T[i]] == -99999.99)
+            if (tCa[T[i]] == -99999.99) //Si le chiffre d'affaire est égale à la valeur arbitraire
             {
                 printf("CA INCONNU");
             }
