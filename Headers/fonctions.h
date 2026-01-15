@@ -29,7 +29,7 @@ typedef struct
 } Trajet;
 
 
-/**
+/**1
 * entre : nb (nombre d'éléments), lTrajet (tableau de Trajet)
 * résultats : void
 * Pré-condition : nb >= 0
@@ -37,7 +37,7 @@ typedef struct
 **/
 void afficherNTrajet(int nb, Trajet lTrajet[nb]);
 
-/**
+/**2
 * entre : nb (nombre d'éléments), trajet (tableau de Trajet), numbus (numéro du bus recherché)
 * résultats : void
 * Pré-condition : nb >= 0
@@ -45,7 +45,7 @@ void afficherNTrajet(int nb, Trajet lTrajet[nb]);
 **/
 void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus);
 
-/**
+/**3
 * entre : nb (nombre d'éléments), lTrajet (tableau de Trajet)
 * résultats : void
 * Pré-condition : nb >= 0
@@ -53,7 +53,7 @@ void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus);
 **/
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb]);
 
-/**
+/**4
 * entre : nb (nombre d'éléments), trajet (tableau de Trajet), numbus (numéro du bus), new_or_not (Passager à ajouter/supprimer)
 * résultats : void
 * Pré-condition : nb >= 0
@@ -61,7 +61,7 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]);
 **/
 void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_not);
 
-/**
+/**5
 * entre : nb (nombre d'éléments), lTrajet (pointeur vers tableau de Trajet), numbus (numéro du bus), client (Passager avec nouvelles infos)
 * résultats : void
 * Pré-condition : nb >= 0
@@ -69,7 +69,7 @@ void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_no
 **/
 void modificationClients(int nb, Trajet *lTrajet, int numbus, Passager client);
 
-/**
+/**6
 * entre : nb (nombre d'éléments), trajet (tableau de Trajet), name (nom du fichier de sauvegarde)
 * résultats : void
 * Pré-condition : name est un chemin valide accessible en écriture
@@ -77,7 +77,7 @@ void modificationClients(int nb, Trajet *lTrajet, int numbus, Passager client);
 **/
 void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name);
 
-/**
+/**7
 * entre : n (nombre d'éléments), lTrajet (tableau source), lTrajet_filtre (tableau destination), ville (filtre ville départ), dateDepart (filtre date)
 * résultats : int (nombre de trajets trouvés)
 * Pré-condition : lTrajet_filtre doit être alloué avec une taille suffisante (>= n)
@@ -85,7 +85,7 @@ void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name);
 **/
 int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50], Date dateDepart);
 
-/**
+/**8
 * entre : n (nombre d'éléments), lTrajet (tableau source), lTrajet_filtre (tableau destination), villeDepart, villeArrivee, dateDepart
 * résultats : int (nombre de trajets trouvés)
 * Pré-condition : lTrajet_filtre doit être alloué avec une taille suffisante (>= n)
@@ -94,7 +94,7 @@ int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50
 int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDepart[50], char villeArrivee[50], Date dateDepart);
 
 
-/**
+/**9
 * entre : nb (nombre d'éléments), lTrajet (tableau de Trajet)
 * résultats : void
 * Pré-condition : nb >= 0
@@ -103,7 +103,7 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
 void affichageTrajetTriesCA(int nb, Trajet *lTrajet);
 
 
-/**
+/**10
 * entre : nb (nombre d'éléments), ltrajet (tableau de Trajet)
 * résultats : int (nouveau nombre de trajets)
 * Pré-condition : nb >= 0
