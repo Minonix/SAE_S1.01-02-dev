@@ -265,23 +265,21 @@ int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50
     complexite = 0;
 
     int j = 0;
-    complexite += 1;
+    char villetmp[50];
+
     for (int i = 0; i < n; i++)
     {
-        complexite += 2;
-
-        complexite += 2;
-        if (compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
+        copie_str(villetmp, lTrajet[i].villeDepart);
+        upper(villetmp); // Pour ignorer la casse
+        upper(ville);
+        if (compare_date(lTrajet[i].dateDepart, dateDepart) == 0) // On filtre les trajets sur leurs dates de départs
         {
-            complexite += 3;
-            if (str_cmp(lTrajet[i].horaireArrivee, lTrajet[i].horaireDepart) <= 0)
-            {
-                complexite += 2;
-                if (str_cmp(lTrajet[i].villeDepart, ville) == 0)
+            if (str_cmp(lTrajet[i].horaireArrivee, lTrajet[i].horaireDepart) <= 0) // On les refiltres sur les horaires, il doit partir un jour et
+            {                                                                      // arriver le lendemain
+                if (str_cmp(villetmp, ville) == 0) //Les villes sont les mêmes sans prendre en compte la casse
                 {
-                    complexite += 4;
-                    lTrajet_filtre[j] = lTrajet[i];
-                    j++;
+                    lTrajet_filtre[j] = lTrajet[i]; //On sélectionne le Trajet, donc on le met dans lTrajet_filtre
+                    j++;                            //La taille de lTrajet_filtre augmente
                 }
             }
         }
@@ -299,12 +297,20 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
     complexite += 2;
     for (int i = 0; i < n; i++)
     {
-        complexite += 2;
+        char lVilleArriver_tmp[50];
+        char lVilleDepart_tmp[50];
+        char villeArrivee_tmp[50];
+        char villeDepart_tmp[50];
 
-        complexite += 8;
-        if (str_cmp(lTrajet[i].horaireArrivee, villeArrivee) == 0
-        && str_cmp(lTrajet[i].horaireArrivee, villeDepart) == 0
-        && compare_date(lTrajet[i].dateDepart, dateDepart) == 2)
+        copie_str(lVilleArriver_tmp, lTrajet[i].villeArrivee);
+        copie_str(lVilleDepart_tmp, lTrajet[i].villeDepart);
+        copie_str(villeArrivee_tmp, villeArrivee);
+        copie_str(villeDepart_tmp, villeDepart);
+        upper(lVilleArriver_tmp);
+        upper(lVilleDepart_tmp);
+        upper(villeArrivee_tmp);
+        upper(villeDepart_tmp);
+        if (str_cmp(lVilleArriver_tmp, villeArrivee_tmp) == 0 && str_cmp(lVilleDepart_tmp, villeDepart_tmp) == 0 && compare_date(lTrajet[i].dateDepart, dateDepart) == 0)
         {
             complexite += 4;
             lTrajet_filtre[j] = lTrajet[i];
@@ -369,25 +375,45 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet)
     complexite += 1;
 }
 
+// TODO: fonction a faire
+//  10. la possibilité de supprimer tous les bus avec un chiffre d’affaires négatif, en répartissant les passagers
+//  sur les trajets identiques, en priorisant les passagers ayant payé le plus sur les dates et horaires les plus
+//  proches du trajet initial. Il faudra indiquer le gain généré par cette opération
 
-//TODO: fonction a faire
-// 10. la possibilité de supprimer tous les bus avec un chiffre d’affaires négatif, en répartissant les passagers
-// sur les trajets identiques, en priorisant les passagers ayant payé le plus sur les dates et horaires les plus
-// proches du trajet initial. Il faudra indiquer le gain généré par cette opération
+int supprBusCANegatif(int nb, Trajet ltrajet[])
+{
+    int nb_removed = 0;
+    int write_idx = 0;
+    double gl_ca_1 = 0;
+    double gl_ca_2 = 0;
+    Trajet wait[nb];
 
-// void supprBusCANegatif(int nb, Trajet ltrajet[nb], int numbus) {
-//     int dec = 0, nb_pass = 0;
-//     double ca;
-//     Trajet wait[nb];
-//     for (int i = 0; i + dec < nb; i++) {
+    for (int i = 0; i < nb; i++)
+    {
+        double ca = calcule_ca(ltrajet[i]);
+        gl_ca_1 += ca;
+        if (ca < 0)
+        {
+            wait[nb_removed] = ltrajet[i];
+            nb_removed++;
+        }
+        else
+        {
+            if (write_idx != i)
+            {
+                ltrajet[write_idx] = ltrajet[i];
+            }
+            write_idx++;
+        }
+    }
 
-//         while ((ca = calcule_ca(ltrajet[i])) < 0) {
-//             wait[dec] = ltrajet[i];
-//             nb_pass++;
-//             dec++;
-//         ltrajet[i] = ltrajet[i+dec];
-//     }
-//     }
-//     nb -= dec;
-//     reatribution(wait, ltrajet, nb, nb_pass);
-// }
+    printf("Trajets avec CA négatif supprimés : %d\n", nb_removed);
+    for (int i = 0; i < nb_removed; i++) afficherTrajet(wait[i]);
+
+    reatribution(wait, ltrajet, nb_removed, write_idx);
+
+    for (int i = 0; i < nb; i++) gl_ca_2 += calcule_ca(ltrajet[i]);
+
+    printf("cette modification à eux un bénéfice ou un couts de : %.2lf\n", gl_ca_2 - gl_ca_1);
+    return write_idx;
+}
