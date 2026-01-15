@@ -282,7 +282,7 @@ int supprBusCANegatif(int nb, Trajet ltrajet[])
     {
         double ca = calcule_ca(ltrajet[i]);
         gl_ca_1 += ca;
-        if (ca < 0)
+        if (ca < 0 && ca != -99999.99)
         {
             wait[nb_removed] = ltrajet[i];
             nb_removed++;
