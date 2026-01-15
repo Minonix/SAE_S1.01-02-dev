@@ -7,9 +7,15 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders
 
 #pour windows :
-LDFLAGS = -Wl,--stack=1677721600
+# LDFLAGS = -Wl,--stack=1677721600
 #pour Linux
 # LDFLAGS = -Wl,-z,stack-size=16777216
+
+ifeq ($(OS),Windows_NT)
+    LDFLAGS = -Wl,--stack=1677721600
+else
+    LDFLAGS = -Wl,-z,stack-size=16777216
+endif
 
 
 # Nom de l'exécutable final
