@@ -273,7 +273,7 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet)
 //  sur les trajets identiques, en priorisant les passagers ayant payé le plus sur les dates et horaires les plus
 //  proches du trajet initial. Il faudra indiquer le gain généré par cette opération
 
-int supprBusCANegatif(int nb, Trajet ltrajet[])
+int supprBusCANegatif(int nb, Trajet ltrajet[nb])
 {
     int nb_removed = 0;
     int write_idx = 0;

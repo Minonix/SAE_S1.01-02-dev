@@ -19,7 +19,6 @@ else
     LDFLAGS = -Wl,-z,stack-size=16777216
 endif
 
-
 # Nom de l'exécutable final
 EXEC = main.exe
 OBJDIR = obj
