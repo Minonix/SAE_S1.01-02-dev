@@ -3,7 +3,7 @@
 #include "../Headers/parsec.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+
 
 // --- MAIN ---
 int main(int argc, char *argv[])
@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
         }
         else if (choix == 10)
         {
-            nb_l = supprBusCANegatif(nb_l, fichier); 
+            nb_l = supprBusCANegatif(nb_l, fichier);
         }
         else if (choix == 777) {
             //zone de test

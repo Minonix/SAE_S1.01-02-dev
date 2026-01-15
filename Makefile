@@ -15,12 +15,13 @@ endif
 
 ifeq ($(OS_DETECTED),Windows_NT)
     LDFLAGS = -Wl,--stack=1677721600
+    EXEC = main.exe
 else
     LDFLAGS = -Wl,-z,stack-size=16777216
+    EXEC = main.out
 endif
 
 # Nom de l'exécutable final
-EXEC = main.exe
 OBJDIR = obj
 SRCS = $(wildcard Sources/*.c)
 OBJS = $(patsubst Sources/%.c, $(OBJDIR)/%.o, $(SRCS))
