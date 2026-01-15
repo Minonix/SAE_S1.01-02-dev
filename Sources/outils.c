@@ -6,7 +6,7 @@ void copie_str(char *c1, char *c2)
     int i = 0;
     for (i = 0; c2[i] != 0; i++)
     {
-        c1[i] = c2[i];
+        c1[i] = c2[i]; //on copie le ieme caractere de c2 dans c1
     }
     c1[i] = 0;
 }
@@ -16,9 +16,9 @@ int str_cmp(char *ch1, char *ch2)
     int i;
     for (i = 0; ch1[i] != 0 && ch2[i] != 0; i++)
     {
-        if (ch1[i] > ch2[i])
+        if (ch1[i] > ch2[i]) //La chaine 1 est avant
             return 1;
-        if (ch1[i] < ch2[i])
+        if (ch1[i] < ch2[i]) // La chaine 2  est avant
             return -1;
     }
     return ch1[i] - ch2[i];
@@ -28,7 +28,7 @@ void upper(char *ch)
 {
     for (int i = 0; ch[i] != 0; i++)
     {
-        if (ch[i] >= 'a' && ch[i] <= 'z')
+        if (ch[i] >= 'a' && ch[i] <= 'z') //si c'est une lettre minuscule
         {
             ch[i] = ch[i] - ('a' - 'A');
         }
@@ -46,34 +46,36 @@ int compare_date(Date d1, Date d2)
 void tri_selection_indirect(int n, Trajet lTrajet[n], int T[n])
 {
     int temp;
+    int j_selectionne;
+
     for (int i = 0; i < n - 1; i++)
     {
-        int j_mini = i;
+        j_selectionne = i;  //l'indice à selectionné est pour l'instant le premier
         for (int j = i + 1; j < n; j++)
         {
-            if (str_cmp(lTrajet[T[j]].villeDepart, lTrajet[T[j_mini]].villeDepart) == 0)
+            if (str_cmp(lTrajet[T[j]].villeDepart, lTrajet[T[j_selectionne]].villeDepart) == 0) // si les deux villes sont égales
             {
-                if (compare_date(lTrajet[T[j]].dateDepart, lTrajet[T[j_mini]].dateDepart))
-                    j_mini = j;
+                if (compare_date(lTrajet[T[j]].dateDepart, lTrajet[T[j_selectionne]].dateDepart))// on cherche quelle horaire est avant
+                    j_selectionne = j;
             }
-            if (str_cmp(lTrajet[T[j_mini]].villeDepart, lTrajet[T[j]].villeDepart) > 0)
+            if (str_cmp(lTrajet[T[j_selectionne]].villeDepart, lTrajet[T[j]].villeDepart) > 0) // si les villes sont différentes
             {
-                j_mini = j;
+                j_selectionne = j;
             }
         }
-        temp = T[i];
-        T[i] = T[j_mini];
-        T[j_mini] = temp;
+        temp = T[i];            //on échange l'indice i, le plus grand indice non triés
+        T[i] = T[j_selectionne];//avec j_selectionne, qui est l'indice à trier
+        T[j_selectionne] = temp;
     }
 }
 
 void afficherhoraire(char *horaire)
 {
     if (horaire[0] == 0)
-        printf("ABSENT");
+        printf("ABSENT"); //Si l'horaire n'est pas présent
     else
     {
-        printf(" %c%c:%c%c", horaire[0], horaire[1], horaire[2], horaire[3]);
+        printf(" %c%c:%c%c", horaire[0], horaire[1], horaire[2], horaire[3]); //On affiche l'horaire sous forme hh:mm
     }
 }
 
@@ -96,30 +98,30 @@ double calcule_ca(Trajet trajet)
     double somme_billet = 0.0;
     int cout_bus = 100;
 
-    if (trajet.horaireDepart[0] == 0 || trajet.horaireArrivee[0] == 0)
+    if (trajet.horaireDepart[0] == 0 || trajet.horaireArrivee[0] == 0) //L'horaire d'arrivé ou de départ est absent
     {
         return -99999.99;
     } // valeur arbitraire
 
-    sscanf(trajet.horaireDepart, "%2d%2d", &hd, &md);
-    sscanf(trajet.horaireArrivee, "%2d%2d", &ha, &ma);
+    sscanf(trajet.horaireDepart, "%2d%2d", &hd, &md);//hd pour heure départ, md pour minute départ
+    sscanf(trajet.horaireArrivee, "%2d%2d", &ha, &ma);//ha pour heure arrivé, ma pour minute arrivé
 
-    int tDepart = hd * 60 + md;
-    int tArrivee = ha * 60 + ma;
+    int tDepart = hd * 60 + md; //tDepart en minutes donc heure*60
+    int tArrivee = ha * 60 + ma;//tArrivee en minutes donc heure*60
 
-    if (tArrivee < tDepart)
+    if (tArrivee < tDepart) // Passage de minuit
     {
-        tArrivee += 24 * 60; // passage de minuit
+        tArrivee += 24 * 60; // On ajoute 24 heures en minutes
     }
-    cout_bus += ((tArrivee - tDepart + 59) / 60) * 50;
+    cout_bus += ((tArrivee - tDepart + 59) / 60) * 50; // On ajoute 59 pour arrondir au supérieur
 
     int i = 0;
-    while (i < trajet.nb_passager)
+    while (i < trajet.nb_passager)//calcule de la somme du coût des billets
     {
         somme_billet += trajet.listePassagers[i].prixbillet;
         i++;
     }
-    return somme_billet - cout_bus;
+    return somme_billet - cout_bus; //La dif entre la somme des billets et le coût du bus
 }
 
 void tri_selection_indirect_ca(int n, int T[n], double tCa[n])
@@ -127,12 +129,13 @@ void tri_selection_indirect_ca(int n, int T[n], double tCa[n])
     int temp;
     for (int i = 0; i < n - 1; i++)
     {
-        int j_mini = i;
+        int j_mini = i; //le plus petit indice non trié
+
         for (int j = i + 1; j < n; j++)
         {
-            if (tCa[T[j]] < tCa[T[j_mini]])
+            if (tCa[T[j]] < tCa[T[j_mini]]) // si l'indice j_mini n'est pas le plus petit
             {
-                j_mini = j;
+                j_mini = j; // l'indice minimum est j.
             }
         }
         temp = T[i];
@@ -159,7 +162,7 @@ void tri_selection_horaire(int nb, int n, Trajet ltrajet[nb], int s_trajet[n], T
         int j_mini = i;
         for (int j = i + 1; j < n; j++)
         {
-            if (compare_horaire(ltrajet[s_trajet[j]].horaireDepart, trajetCible.horaireDepart) < compare_horaire(ltrajet[s_trajet[j_mini]].horaireDepart, trajetCible.horaireDepart) 
+            if (compare_horaire(ltrajet[s_trajet[j]].horaireDepart, trajetCible.horaireDepart) < compare_horaire(ltrajet[s_trajet[j_mini]].horaireDepart, trajetCible.horaireDepart)
             && compare_date(ltrajet[s_trajet[j]].dateDepart, trajetCible.dateDepart) < compare_date(ltrajet[s_trajet[j_mini]].dateDepart, trajetCible.dateDepart))
             {
                 j_mini = j;
@@ -226,7 +229,6 @@ void reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb)
         {
             Passager current_passager = wait[i].listePassagers[p];
             int passager_attribue = 0;
-            
             for (int j = 0; j < nb_trajets_identiques && !passager_attribue; j++)
             {
                 int idx = indices_trajets_identiques[j];
