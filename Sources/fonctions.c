@@ -274,11 +274,14 @@ int supprBusCANegatif(int nb, Trajet ltrajet[])
 {
     int nb_removed = 0;
     int write_idx = 0;
+    double gl_ca_1 = 0;
+    double gl_ca_2 = 0;
     Trajet wait[nb];
 
     for (int i = 0; i < nb; i++)
     {
         double ca = calcule_ca(ltrajet[i]);
+        gl_ca_1 += ca;
         if (ca < 0)
         {
             wait[nb_removed] = ltrajet[i];
@@ -294,16 +297,13 @@ int supprBusCANegatif(int nb, Trajet ltrajet[])
         }
     }
 
-    // printf("Trajets avec CA négatif supprimés : %d\n", nb_removed);
-    // for (int i = 0; i < nb_removed; i++)
-    // {
-    //     afficherTrajet(wait[i]);
-    //     for (int p = 0; p < wait[i].nb_passager; p++)
-    //     {
-    //         printf(" Passager %d: %s (ID: %d, Prix: %.2f)\n", p + 1, wait[i].listePassagers[p].nom, wait[i].listePassagers[p].id, wait[i].listePassagers[p].prixbillet);
-    //     }
-    // }
+    printf("Trajets avec CA négatif supprimés : %d\n", nb_removed);
+    for (int i = 0; i < nb_removed; i++) afficherTrajet(wait[i]);
 
     reatribution(wait, ltrajet, nb_removed, write_idx);
+
+    for (int i = 0; i < nb; i++) gl_ca_2 += calcule_ca(ltrajet[i]);
+
+    printf("cette modification à eux un bénéfice ou un couts de : %.2lf\n", gl_ca_2 - gl_ca_1);
     return write_idx;
 }

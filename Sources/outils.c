@@ -200,6 +200,7 @@ int filtrerTrajetsIdentiques(int nb, Trajet *lTrajet, int *indices_trajets_ident
 
 void reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb)
 {
+    int no_attribute = 0;
     for (int i = 0; i < nb_pass; i++)
     {
         // Tri des passagers de ce trajet par prix de billet décroissant
@@ -238,11 +239,9 @@ void reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb)
                     passager_attribue = 1;
                 }
             }
-            if (passager_attribue)
-            {
-                printf("Le passager %s du bus %d a pu être réattribué.\n", current_passager.nom, wait[i].numbus);
-            }
+            if (!passager_attribue) no_attribute++;
         }
     }
+    printf("%d passagers n'ont pas pus etre réatribuer et on été perdus\n", no_attribute);
 }
 
