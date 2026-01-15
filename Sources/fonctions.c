@@ -64,9 +64,6 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb])
 }
 
 // 4. à partir du numéro d’un bus, ajout et suppression de clients
-/**
- * l'id n'a pas d'incidence, le nom est sensible a la casse
- */
 void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_not)
 {
     int a = 0;
@@ -76,7 +73,13 @@ void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_no
         { // une fois le bon trajet trouver
             for (int y = 0; y < trajet[i].nb_passager; y++)
             { // on parcours tout les passager
-                if (str_cmp(trajet[i].listePassagers[y].nom, new_or_not.nom) == 0)
+                char nom_tmp[50];
+                char new_nom_tmp[50];
+                copie_str(nom_tmp, trajet[i].listePassagers[y].nom);
+                copie_str(new_nom_tmp, new_or_not.nom);
+                upper(nom_tmp);
+                upper(new_nom_tmp);
+                if (str_cmp(nom_tmp, new_nom_tmp) == 0)
                     a = 1; // si le nom du passager est le meme
                 if (a)
                 {
