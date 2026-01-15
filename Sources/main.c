@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern long long complexite ;
+
 // --- MAIN ---
 int main(int argc, char *argv[])
 {

@@ -58,7 +58,7 @@ void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus)
     printf("aucun trajet n'a été trouver\n");
 }
 
-// 3. l’affichage de tous les trajets triés par ville de départ et par date de départ
+// 3
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb])
 {
     complexite = 0 ;
@@ -380,7 +380,7 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet)
 //  sur les trajets identiques, en priorisant les passagers ayant payé le plus sur les dates et horaires les plus
 //  proches du trajet initial. Il faudra indiquer le gain généré par cette opération
 
-int supprBusCANegatif(int nb, Trajet ltrajet[])
+int supprBusCANegatif(int nb, Trajet ltrajet[nb])
 {
     complexite = 0;
 

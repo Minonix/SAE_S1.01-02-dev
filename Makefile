@@ -7,13 +7,21 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 -IHeaders
 
 #pour windows :
-LDFLAGS = -Wl,--stack=1677721600
+# LDFLAGS = -Wl,--stack=1677721600
 #pour Linux
 # LDFLAGS = -Wl,-z,stack-size=16777216
 
+ifeq ($(OS),Windows_NT)
+    LDFLAGS = -Wl,--stack=1677721600
+    EXEC = main.exe
+else
+    LDFLAGS = -Wl,-z,stack-size=16777216
+    EXEC = main.out
+endif
+
 
 # Nom de l'exécutable final
-EXEC = main.exe
+
 OBJDIR = obj
 SRCS = $(wildcard Sources/*.c)
 OBJS = $(patsubst Sources/%.c, $(OBJDIR)/%.o, $(SRCS))
