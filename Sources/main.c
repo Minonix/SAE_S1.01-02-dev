@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
         }
         else if (choix == 10)
         {
-            nb_l = supprBusCANegatif(nb_l, fichier); 
+            nb_l = supprBusCANegatif(nb_l, fichier);
         }
         else if (choix == 777) {
             //zone de test
@@ -232,7 +232,7 @@ int main(int argc, char *argv[])
             while ((c = getchar()) != '\n' && c != EOF);
         }
 
-        printf("%lld",complexite);
+        printf("nombre d'opération : %lld",complexite);
         int debug ;
         while ((debug = getchar()) != '\n' && debug != EOF);
 
