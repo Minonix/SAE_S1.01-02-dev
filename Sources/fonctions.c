@@ -382,38 +382,62 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet)
 
 int supprBusCANegatif(int nb, Trajet ltrajet[])
 {
+    complexite = 0;
+
     int nb_removed = 0;
     int write_idx = 0;
     double gl_ca_1 = 0;
     double gl_ca_2 = 0;
     Trajet wait[nb];
 
+    complexite += 5;
+
+    complexite += 1;
+
     for (int i = 0; i < nb; i++)
     {
+        complexite += 2;
+
+        complexite += 3;
         double ca = calcule_ca(ltrajet[i]);
         gl_ca_1 += ca;
+
+        complexite += 1;
         if (ca < 0)
         {
+            complexite += 4;
             wait[nb_removed] = ltrajet[i];
             nb_removed++;
         }
         else
         {
+            complexite += 1;
             if (write_idx != i)
             {
+                complexite += 3;
                 ltrajet[write_idx] = ltrajet[i];
             }
             write_idx++;
+            complexite += 1;
         }
     }
+    complexite += 1;
 
     printf("Trajets avec CA négatif supprimés : %d\n", nb_removed);
-    for (int i = 0; i < nb_removed; i++) afficherTrajet(wait[i]);
+    complexite += 1;
+    for (int i = 0; i < nb_removed; i++) {
+        complexite += 3;
+        afficherTrajet(wait[i]);
+    }
+    complexite += 1;
 
     reatribution(wait, ltrajet, nb_removed, write_idx);
-
-    for (int i = 0; i < nb; i++) gl_ca_2 += calcule_ca(ltrajet[i]);
-
+    complexite += 1;
+    for (int i = 0; i < nb; i++) {
+        complexite += 4;
+        gl_ca_2 += calcule_ca(ltrajet[i]);
+    }
+    complexite += 1;
     printf("cette modification à eux un bénéfice ou un couts de : %.2lf\n", gl_ca_2 - gl_ca_1);
     return write_idx;
 }
