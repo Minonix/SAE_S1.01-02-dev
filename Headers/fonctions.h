@@ -34,6 +34,7 @@ typedef struct
 * résultats : void
 * Pré-condition : nb >= 0
 * Post-condition : Affiche tous les trajets (villes, dates, horaires) sur la sortie standard
+Milo ROUSSET
 **/
 void afficherNTrajet(int nb, Trajet lTrajet[nb]);
 
@@ -42,6 +43,7 @@ void afficherNTrajet(int nb, Trajet lTrajet[nb]);
 * résultats : void
 * Pré-condition : nb >= 0
 * Post-condition : Affiche les détails complets du trajet correspondant au numéro de bus, ou un message d'erreur si non trouvé
+Clement Martini
 **/
 void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus);
 
@@ -50,6 +52,7 @@ void afficheInfoTrajet(int nb, Trajet trajet[nb], int numbus);
 * résultats : void
 * Pré-condition : nb >= 0
 * Post-condition : Affiche les trajets triés par ville de départ puis par date de départ
+Milo ROUSSET
 **/
 void afficherTrajetTrie(int nb, Trajet lTrajet[nb]);
 
@@ -58,6 +61,7 @@ void afficherTrajetTrie(int nb, Trajet lTrajet[nb]);
 * résultats : void
 * Pré-condition : nb >= 0
 * Post-condition : Ajoute le passager s'il n'existe pas (et s'il reste de la place), ou le supprime s'il existe (basé sur le nom) dans le bus spécifié
+Clement Martini
 **/
 void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_not);
 
@@ -66,6 +70,7 @@ void ajoutSupprClients(int nb, Trajet trajet[nb], int numbus, Passager new_or_no
 * résultats : void
 * Pré-condition : nb >= 0
 * Post-condition : Modifie le nom et le prix du passager (identifié par ID) dans le bus spécifié, ou l'ajoute si non trouvé
+Milo ROUSSET
 **/
 void modificationClients(int nb, Trajet *lTrajet, int numbus, Passager client);
 
@@ -74,6 +79,7 @@ void modificationClients(int nb, Trajet *lTrajet, int numbus, Passager client);
 * résultats : void
 * Pré-condition : name est un chemin valide accessible en écriture
 * Post-condition : Écrit l'ensemble des données des trajets et passagers dans le fichier spécifié au format CSV
+Clement Martini
 **/
 void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name);
 
@@ -82,6 +88,7 @@ void sauvegardeDonnees(int nb, Trajet trajet[nb], char *name);
 * résultats : int (nombre de trajets trouvés)
 * Pré-condition : lTrajet_filtre doit être alloué avec une taille suffisante (>= n)
 * Post-condition : Remplit lTrajet_filtre avec les trajets partant de la ville donnée à la date donnée et arrivant le lendemain
+Milo ROUSSET
 **/
 int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50], Date dateDepart);
 
@@ -90,6 +97,7 @@ int filtreTrajets1(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char ville[50
 * résultats : int (nombre de trajets trouvés)
 * Pré-condition : lTrajet_filtre doit être alloué avec une taille suffisante (>= n)
 * Post-condition : Remplit lTrajet_filtre avec les trajets correspondant aux villes de départ/arrivée et à la date spécifiées
+Clement Martini
 **/
 int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDepart[50], char villeArrivee[50], Date dateDepart);
 
@@ -99,6 +107,7 @@ int filtreTrajets2(int n, Trajet *lTrajet, Trajet *lTrajet_filtre, char villeDep
 * résultats : void
 * Pré-condition : nb >= 0
 * Post-condition : Affiche la liste des trajets triée par chiffre d'affaires croissant
+Milo ROUSSET
 **/
 void affichageTrajetTriesCA(int nb, Trajet *lTrajet);
 
@@ -108,6 +117,7 @@ void affichageTrajetTriesCA(int nb, Trajet *lTrajet);
 * résultats : int (nouveau nombre de trajets)
 * Pré-condition : nb >= 0
 * Post-condition : Supprime les bus à CA négatif, réattribue leurs passagers sur d'autres bus compatibles, et retourne la nouvelle taille du tableau
+Clement Martini
 **/
 int supprBusCANegatif(int nb, Trajet ltrajet[nb]);
 

@@ -8,6 +8,7 @@
 * résultats : void
 * Pré-condition : c1 doit être alloué et de taille suffisante pour contenir c2
 * Post-condition : Copie la chaîne de caractères c2 dans c1
+Milo ROUSSET
 **/
 void copie_str(char *c1, char *c2);
 
@@ -17,6 +18,7 @@ void copie_str(char *c1, char *c2);
 * résultats : int (résultat de la comparaison)
 * Pré-condition : ch1 et ch2 sont des chaînes valides terminées par \0
 * Post-condition : Retourne 0 si identiques, >0 si ch1 > ch2, <0 si ch1 < ch2 (ordre lexicographique)
+Milo ROUSSET
 **/
 int str_cmp(char *ch1, char *ch2);
 
@@ -25,6 +27,7 @@ int str_cmp(char *ch1, char *ch2);
 * résultats : double (chiffre d'affaires)
 * Pré-condition : Les horaires doivent être au format valide
 * Post-condition : Calcule le bénéfice (somme des billets - coût du trajet)
+Milo ROUSSET
 **/
 double calcule_ca(Trajet trajet);
 
@@ -33,6 +36,7 @@ double calcule_ca(Trajet trajet);
 * résultats : void
 * Pré-condition : ch est une chaîne valide
 * Post-condition : Convertit les lettres minuscules de la chaîne en majuscules
+Milo ROUSSET
 **/
 void upper(char* ch);
 
@@ -41,6 +45,7 @@ void upper(char* ch);
 * résultats : int (différence en jours)
 * Pré-condition : aucune
 * Post-condition : Retourne un entier positif si d1 < d2, négatif si d1 > d2, 0 si égales
+Clement Martini
 **/
 int compare_date(Date d1, Date d2);
 
@@ -49,6 +54,7 @@ int compare_date(Date d1, Date d2);
 * résultats : void
 * Pré-condition : horaire contient 4 caractères ou est vide
 * Post-condition : Affiche l'horaire au format HH:MM ou "ABSENT"
+Milo ROUSSET
 **/
 void afficherhoraire(char *horaire);
 
@@ -57,6 +63,7 @@ void afficherhoraire(char *horaire);
 * résultats : void
 * Pré-condition : aucune
 * Post-condition : Affiche les informations principales du trajet sur une ligne
+Clement Martini
 **/
 void afficherTrajet(Trajet lTrajet);
 
@@ -65,6 +72,7 @@ void afficherTrajet(Trajet lTrajet);
 * résultats : void
 * Pré-condition : T doit être initialisé avec les indices de 0 à n-1
 * Post-condition : Trie le tableau d'indices T selon la ville de départ et la date des trajets dans lTrajet
+Milo ROUSSET
 **/
 void tri_selection_indirect(int n, Trajet lTrajet[], int T[]);
 
@@ -73,6 +81,7 @@ void tri_selection_indirect(int n, Trajet lTrajet[], int T[]);
 * résultats : void
 * Pré-condition : T doit être initialisé, tCa doit correspondre aux indices
 * Post-condition : Trie le tableau d'indices T selon les valeurs croissantes de tCa
+Milo ROUSSET
 **/
 void tri_selection_indirect_ca(int n, int T[], double tCa[]);
 
@@ -81,6 +90,7 @@ void tri_selection_indirect_ca(int n, int T[], double tCa[]);
 * résultats : void
 * Pré-condition : s_trajet contient n indices valides
 * Post-condition : Trie les indices de s_trajet par proximité d'horaire et de date avec le trajetCible
+Clement Martini
 **/
 void tri_selection_horaire(int nb, int n, Trajet ltrajet[nb], int s_trajet[n], Trajet trajetCible);
 
@@ -89,6 +99,7 @@ void tri_selection_horaire(int nb, int n, Trajet ltrajet[nb], int s_trajet[n], T
 * résultats : void
 * Pré-condition : wait contient les trajets dont les passagers doivent être réattribués
 * Post-condition : Tente de replacer les passagers des trajets supprimés vers les trajets valides identiques
+Clement Martini
 **/
 void reatribution(Trajet wait[], Trajet *ltrajet, int nb_pass, int nb);
 
